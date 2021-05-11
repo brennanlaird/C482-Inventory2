@@ -1,4 +1,5 @@
-package model; /**
+package model;
+/**
 * Supplied class Part.java 
  */
 
@@ -13,6 +14,8 @@ public abstract class Part {
     private int stock;
     private int min;
     private int max;    
+
+    //Constructor for the abstract part class
     public Part(int id, String name, double price, int stock, int min, int max) {
         this.id = id;
         this.name = name;

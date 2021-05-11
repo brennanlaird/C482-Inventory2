@@ -94,7 +94,7 @@
                   <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">
                      <children>
                         <Label prefHeight="20.0" prefWidth="90.0" text="ID" translateY="5.0" />
-                        <TextField fx:id="idText" prefHeight="25.0" prefWidth="150.0" />
+                        <TextField fx:id="idText" disable="true" editable="false" prefHeight="25.0" prefWidth="150.0" promptText="Auto Generated" />
                      </children>
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">

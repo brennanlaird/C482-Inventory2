@@ -46,6 +46,13 @@ public class addPartController {
     }
 
     public void saveButtonClick(ActionEvent actionEvent) {
+        //checks the input for errors
+
+        //
+
+
+        //calls the appropriate constructor for the parts
+        //passes the inputs to the constructor
     }
 
     public void clearFormButtonClick(ActionEvent actionEvent) {
