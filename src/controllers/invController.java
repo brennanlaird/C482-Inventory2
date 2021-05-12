@@ -1,16 +1,18 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.InHouse;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,17 +31,21 @@ public class invController implements Initializable {
     public Button modProdButton;
     public Button deleteProdButton;
 
-    public TreeTableView partTable;
-    public TreeTableColumn partIDCol;
-    public TreeTableColumn partNameCol;
-    public TreeTableColumn partInvCol;
-    public TreeTableColumn partPriceCol;
+    public TableView partTable;
+    public TableColumn partIDCol;
+    public TableColumn partNameCol;
+    public TableColumn partInvCol;
+    public TableColumn partPriceCol;
 
-    public TreeTableView productTable;
-    public TreeTableColumn productIDCol;
-    public TreeTableColumn productNameID;
-    public TreeTableColumn prodInvCol;
-    public TreeTableColumn prodPriceCol;
+    public TableView productTable;
+    public TableColumn productIDCol;
+    public TableColumn productNameCol;
+    public TableColumn productInvCol;
+    public TableColumn productPriceCol;
+
+
+    //Sets up an observable list to populate the parts table
+    private ObservableList<Part> allParts = FXCollections.observableArrayList();
 
 
     @Override
@@ -47,11 +53,28 @@ public class invController implements Initializable {
         //Nothing here. This runs before the GUI so stuff can be done here.
 
         //Add test data here
-
-
+        InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99);
+        InHouse partInHouse2 = new InHouse(2,"Test Part 2",3.50,9,1,99);
         //end of test data
 
+        partTable.setItems(allParts);
+
+        //Sets the columns to get the data to display - Note, the last part is named based on the getter methods
+        partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+
+        allParts.add(partInHouse1);
+        allParts.add(partInHouse2);
+
+
     }
+
+
+
+
 
     public void addPartButtonClick(ActionEvent actionEvent) throws IOException {
         //Performs when the add part button is clicked.

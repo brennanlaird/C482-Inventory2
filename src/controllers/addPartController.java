@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.InHouse;
 
 import java.io.IOException;
 
@@ -48,11 +49,30 @@ public class addPartController {
     public void saveButtonClick(ActionEvent actionEvent) {
         //checks the input for errors
 
-        //
+        //Gets the input and assigns it to variables then changes the variables to the right type
+        String partName = nameText.getText();
+        int partInv = Integer.parseInt(invText.getText());
+        double partPrice = Double.parseDouble(priceText.getText());
+        int partMax = Integer.parseInt(maxText.getText());
+        int partMin = Integer.parseInt(minText.getText());
+        int partSource = Integer.parseInt(partSourceText.getText());
+
+        //Determines if the object should be a an in house or outsourced part
 
 
-        //calls the appropriate constructor for the parts
-        //passes the inputs to the constructor
+        if (inHouseRadio.isSelected()){
+            //run the in house constructor
+            InHouse addedPart = new InHouse(1, partName, partPrice, partInv, partMin, partMax);
+
+        } else {
+            //run the outsourced constructor
+        }
+
+
+        //calls the appropriate constructor for the parts and passes the inputs to the constructor
+        //adds the new item to the list for table display
+
+
     }
 
     public void clearFormButtonClick(ActionEvent actionEvent) {
