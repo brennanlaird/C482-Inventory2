@@ -53,8 +53,8 @@ public class invController implements Initializable {
         //This runs before the GUI so stuff can be done here.
 
         //Add test data here
-        InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99);
-        InHouse partInHouse2 = new InHouse(2,"Test Part 2",3.50,9,1,99);
+        //InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99);
+        //InHouse partInHouse2 = new InHouse(2,"Test Part 2",3.50,9,1,99);
         //end of test data
 
 
@@ -69,8 +69,8 @@ public class invController implements Initializable {
 
 
         //Adds the test data to the observable list
-        allParts.add(partInHouse1);
-        allParts.add(partInHouse2);
+        //allParts.add(partInHouse1);
+        //allParts.add(partInHouse2);
 
 
     }
