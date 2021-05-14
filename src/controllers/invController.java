@@ -50,13 +50,15 @@ public class invController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Nothing here. This runs before the GUI so stuff can be done here.
+        //This runs before the GUI so stuff can be done here.
 
         //Add test data here
         InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99);
         InHouse partInHouse2 = new InHouse(2,"Test Part 2",3.50,9,1,99);
         //end of test data
 
+
+        //Sets the parts table from JavaFX to display the items that are contained in the all parts observable list
         partTable.setItems(allParts);
 
         //Sets the columns to get the data to display - Note, the last part is named based on the getter methods
@@ -66,6 +68,7 @@ public class invController implements Initializable {
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
 
+        //Adds the test data to the observable list
         allParts.add(partInHouse1);
         allParts.add(partInHouse2);
 

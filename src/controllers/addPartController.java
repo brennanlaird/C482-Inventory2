@@ -8,6 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.InHouse;
+import model.Part;
+
+import java.util.ArrayList;
+
+
 
 import java.io.IOException;
 
@@ -27,6 +32,9 @@ public class addPartController {
     public TextField maxText;
     public TextField partSourceText;
     public TextField minText;
+
+
+
 
     public void setInHouseRadioSelected(ActionEvent actionEvent) {
         partSourceLabel.setText("Machine ID");
@@ -66,8 +74,8 @@ public class addPartController {
 
         } else {
             //run the outsourced constructor
-        }
 
+        }
 
         //calls the appropriate constructor for the parts and passes the inputs to the constructor
         //adds the new item to the list for table display
