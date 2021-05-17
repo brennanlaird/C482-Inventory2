@@ -8,7 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.InHouse;
+import model.Outsourced;
 import model.PartWarehouse;
+import model.inputvalidation;
+
 import java.io.IOException;
 
 public class addPartController {
@@ -43,9 +46,13 @@ public class addPartController {
         //Cancel button returns to the main screen and does not save changes
         returnToMain(actionEvent);
     }
-
+//runtime error - need to change the company name so it accepts strings in the part source input.
     public void saveButtonClick(ActionEvent actionEvent) throws IOException {
         //checks the input for errors
+        //textFill="#ee0a0a" to change to red
+
+
+        inputvalidation.validInt(invText, invText.getText());
 
 
         //Gets the input and assigns it to variables then changes the variables to the right type
@@ -54,32 +61,30 @@ public class addPartController {
         double partPrice = Double.parseDouble(priceText.getText());
         int partMax = Integer.parseInt(maxText.getText());
         int partMin = Integer.parseInt(minText.getText());
-        int partSource = Integer.parseInt(partSourceText.getText());
+        String partSource = nameText.getText(); //changed this to a string input as the intial integer input caused a runtime error when using outsourced part
+
 
         //Determines if the object should be a an in house or outsourced part
-
         if (inHouseRadio.isSelected()){
             //run the in house constructor to create a new part based on the input data
             InHouse addedPart = new InHouse(1, partName, partPrice, partInv, partMin, partMax);
-
             //Calls the stockWarehouse method which adds the part to the observable list for the parts
             PartWarehouse.stockPartWarehouse(addedPart);
-
-            //This returns to the main form after saving the entered part
-            returnToMain(actionEvent);
-
-
         } else {
-            //runs the outsourced constructor
-
+            //runs the outsourced constructor and sends the data to the warehouse
+            Outsourced addedPart = new Outsourced(2, partName, partPrice, partInv, partMin, partMax);
+            //Calls the stockWarehouse method which adds the part to the observable list for the parts
+            PartWarehouse.stockPartWarehouse(addedPart);
         }
 
 
+        //This returns to the main form after saving the entered part
+        returnToMain(actionEvent);
 
 
     }
 
-    //method to return to the main form.
+    //method to return to the main form. Made static so it can be called from other controllers.
     public static void returnToMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(addPartController.class.getResource("/view/MainForm_v1.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();

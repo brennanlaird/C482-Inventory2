@@ -14,10 +14,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99); //adds a test part
+
+
+
+        //Create the part Warehouse to store and display part objects
         PartWarehouse partWarehouse = new PartWarehouse(); //creates an instance of the parts warehouse
 
-        //ArrayList<Part> partList = new ArrayList<Part>();
+
+
+        //test data
+        InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99); //adds a test part
+        PartWarehouse.stockPartWarehouse(partInHouse1);
+
 
         //Loads the main stage and sets of the main for for the first scene
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainForm_v1.fxml"));
