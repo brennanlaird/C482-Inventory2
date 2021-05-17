@@ -16,7 +16,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99); //adds a test part
         PartWarehouse partWarehouse = new PartWarehouse(); //creates an instance of the parts warehouse
-        ArrayList<Part> partList = new ArrayList<Part>();
+
+        //ArrayList<Part> partList = new ArrayList<Part>();
 
         //Loads the main stage and sets of the main for for the first scene
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainForm_v1.fxml"));

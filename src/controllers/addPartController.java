@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.InHouse;
 import model.Part;
+import model.PartWarehouse;
 
 import java.util.ArrayList;
 
@@ -71,6 +72,7 @@ public class addPartController {
         if (inHouseRadio.isSelected()){
             //run the in house constructor
             InHouse addedPart = new InHouse(1, partName, partPrice, partInv, partMin, partMax);
+            System.out.println(addedPart.getName());
 
         } else {
             //run the outsourced constructor

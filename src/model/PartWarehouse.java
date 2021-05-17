@@ -5,12 +5,15 @@ package model;
 import java.util.ArrayList;
 
 public class PartWarehouse {
-    Part[] partArray = new Part[10];
-    int partStored=0;
+    //Part[] partArray = new Part[10];
+    //int partStored=0;
+
+    ArrayList<Part> partList = new ArrayList<Part>();
+
 
     //Constructor
     public PartWarehouse () {
-        ArrayList<Part> partList = new ArrayList<Part>();
+        //ArrayList<Part> partList = new ArrayList<Part>();
 
         //System.out.println();
         System.out.println("The part warehouse constructor ran");
@@ -19,7 +22,7 @@ public class PartWarehouse {
     //static method to add parts to the warehouse
     public void stockPartWarehouse(Part newPart) {
         //partArray[partStored++] = new InHouse();
-
+        partList.add(newPart);
     }
 
     //write code to use a data structure to store each object
