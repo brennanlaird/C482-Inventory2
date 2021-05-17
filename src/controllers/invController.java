@@ -1,7 +1,6 @@
 package controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,8 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.InHouse;
-import model.Part;
 import model.PartWarehouse;
 
 import java.io.IOException;
@@ -45,13 +42,10 @@ public class invController implements Initializable {
     public TableColumn productPriceCol;
 
 
-    //Sets up an observable list to populate the parts table
-    //private ObservableList<Part> allParts = FXCollections.observableArrayList();
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //This runs before the GUI so stuff can be done here.
+        //This runs before the GUI so stuff can be done here. It will run each time before it is loaded
 
         //Add test data here
         //InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99);
@@ -59,7 +53,7 @@ public class invController implements Initializable {
         //end of test data
 
 
-        //Sets the parts table from JavaFX to display the items that are contained in the all parts observable list
+        //Sets the parts table from JavaFX to display the items that are contained in the all parts observable list found in the PartWarehouse class
         partTable.setItems(PartWarehouse.getAllParts());
 
         //Sets the columns to get the data to display - Note, the last part is named based on the getter methods
@@ -67,11 +61,6 @@ public class invController implements Initializable {
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-
-        //Adds the test data to the observable list
-        //allParts.add(partInHouse1);
-        //allParts.add(partInHouse2);
 
 
     }
