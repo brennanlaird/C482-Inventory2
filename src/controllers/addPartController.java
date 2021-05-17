@@ -47,15 +47,10 @@ public class addPartController {
 
     public void cancelButtonClick(ActionEvent actionEvent) throws IOException {
         //Cancel button returns to the main screen and does not save changes
-        Parent root = FXMLLoader.load(getClass().getResource("/view/MainForm_v1.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("DFC Inventory Control");
-        stage.setScene(scene);
-        stage.show();
+        returnToMain(actionEvent);
     }
 
-    public void saveButtonClick(ActionEvent actionEvent) {
+    public void saveButtonClick(ActionEvent actionEvent) throws IOException {
         //checks the input for errors
 
         //Gets the input and assigns it to variables then changes the variables to the right type
@@ -72,7 +67,14 @@ public class addPartController {
         if (inHouseRadio.isSelected()){
             //run the in house constructor
             InHouse addedPart = new InHouse(1, partName, partPrice, partInv, partMin, partMax);
-            System.out.println(addedPart.getName());
+            //System.out.println(addedPart.getName());
+
+            //warehouse.addPart  - add this to the all parts observable list that resides in the warehouse class.
+            PartWarehouse.stockPartWarehouse(addedPart);
+
+            //This returns to the main form after saving the entered part
+            returnToMain(actionEvent);
+
 
         } else {
             //run the outsourced constructor
@@ -83,6 +85,16 @@ public class addPartController {
         //adds the new item to the list for table display
 
 
+    }
+
+    //method to return to the main form.
+    public static void returnToMain(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(addPartController.class.getResource("/view/MainForm_v1.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("DFC Inventory Control");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void clearFormButtonClick(ActionEvent actionEvent) {

@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.InHouse;
 import model.Part;
+import model.PartWarehouse;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +46,7 @@ public class invController implements Initializable {
 
 
     //Sets up an observable list to populate the parts table
-    private ObservableList<Part> allParts = FXCollections.observableArrayList();
+    //private ObservableList<Part> allParts = FXCollections.observableArrayList();
 
 
     @Override
@@ -59,7 +60,7 @@ public class invController implements Initializable {
 
 
         //Sets the parts table from JavaFX to display the items that are contained in the all parts observable list
-        partTable.setItems(allParts);
+        partTable.setItems(PartWarehouse.getAllParts());
 
         //Sets the columns to get the data to display - Note, the last part is named based on the getter methods
         partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -74,9 +75,6 @@ public class invController implements Initializable {
 
 
     }
-
-
-
 
 
     public void addPartButtonClick(ActionEvent actionEvent) throws IOException {
