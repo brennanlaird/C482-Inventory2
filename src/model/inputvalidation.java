@@ -43,23 +43,22 @@ public class inputvalidation {
     public static int newPartID() {
         //creates an increments to the next available part ID
 
-
-        //ArrayList<Integer> partIDs = new ArrayList<Integer>();
-
-
+        //The ID starts at 0
         int nextpartID = 0;
 
+        //if the array list is not empty then go to the last item and add 1 to get the next ID
         if (!partIDs.isEmpty()) {
 
             nextpartID = partIDs.get(partIDs.size() - 1) + 1;
 
-            partIDs.add(nextpartID);
-
         } else {
+            //starting Id is 1 for when the array list is empty
             nextpartID = 1;
-            partIDs.add(nextpartID);
 
         }
+
+        //add the part ID determined from the if-else statement
+        partIDs.add(nextpartID);
 
 
         return nextpartID;

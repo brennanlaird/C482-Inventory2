@@ -30,7 +30,7 @@ public class invController implements Initializable {
     public Button deleteProdButton;
 
     public TableView partTable;
-    public TableColumn partIDCol;
+    public TableColumn<Object, Object> partIDCol;
     public TableColumn partNameCol;
     public TableColumn partInvCol;
     public TableColumn partPriceCol;
@@ -87,6 +87,20 @@ public class invController implements Initializable {
     public void deletePartButtonClick(ActionEvent actionEvent) {
         //Performs actions when the delete part button is pressed
         testLabel.setText("You pressed delete part");
+
+        var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION,"" ,ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        deleteConfirm.setTitle("Confirm Delete");
+
+        deleteConfirm.setContentText("Are you sure you want to delete the selected items?");
+
+        deleteConfirm.showAndWait();
+
+        if(deleteConfirm.getResult() == ButtonType.YES) {
+
+            partTable.getItems().removeAll(partTable.getSelectionModel().getSelectedItems());
+        }
+
+
     }
 
     public void exitButtonPress(ActionEvent actionEvent) {
