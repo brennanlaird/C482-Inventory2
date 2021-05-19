@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.InHouse;
 import model.Outsourced;
@@ -29,7 +30,7 @@ public class addPartController {
     public TextField maxText;
     public TextField partSourceText;
     public TextField minText;
-
+    public Label invTextLabel;
 
 
     //Changes the label if the in-house radio button is selected
@@ -46,13 +47,47 @@ public class addPartController {
         //Cancel button returns to the main screen and does not save changes
         returnToMain(actionEvent);
     }
-//runtime error - need to change the company name so it accepts strings in the part source input.
+
+    //runtime error - need to change the company name so it accepts strings in the part source input.
+    //runtime error input validation error box displayed but the code crashed after hitting ok. Need to add a way to reload the form with the data and not continue the code
     public void saveButtonClick(ActionEvent actionEvent) throws IOException {
         //checks the input for errors
-        //textFill="#ee0a0a" to change to red
 
 
-        inputvalidation.validInt(invText, invText.getText());
+        //Set of try-catch blocks to determine if the input types are valid. This will detect if an incorrect type or blank is entered.
+        try {
+            int partInv = Integer.parseInt(invText.getText());
+        } catch (Exception e) {
+            inputvalidation.errorMsg("Error with inventory input. Please enter only numbers.");
+        }
+
+        try {
+            double partPrice = Double.parseDouble(priceText.getText());
+        } catch (Exception e) {
+            inputvalidation.errorMsg("Error with price input. Please enter a number.");
+        }
+
+        try {
+            int partMax = Integer.parseInt(maxText.getText());
+        } catch (Exception e) {
+            inputvalidation.errorMsg("Error with max field. Please enter only numbers.");
+        }
+
+        try {
+            int partMin = Integer.parseInt(minText.getText());
+        } catch (Exception e) {
+            inputvalidation.errorMsg("Error with min field. Please enter only numbers.");
+        }
+
+        try {
+            if (inHouseRadio.isSelected()) {
+                int partSource = Integer.parseInt(partSourceText.getText());
+            }
+
+
+        } catch (Exception e) {
+            inputvalidation.errorMsg("Machine ID must be an integer.");
+        }
 
 
         //Gets the input and assigns it to variables then changes the variables to the right type
@@ -61,33 +96,68 @@ public class addPartController {
         double partPrice = Double.parseDouble(priceText.getText());
         int partMax = Integer.parseInt(maxText.getText());
         int partMin = Integer.parseInt(minText.getText());
-        String partSource = nameText.getText(); //changed this to a string input as the intial integer input caused a runtime error when using outsourced part
+        String partSource = partSourceText.getText(); //changed this to a string input as the initial integer input caused a runtime error when using outsourced part
 
 
-        //Determines if the object should be a an in house or outsourced part
-        if (inHouseRadio.isSelected()){
-            //run the in house constructor to create a new part based on the input data
-            InHouse addedPart = new InHouse(1, partName, partPrice, partInv, partMin, partMax);
-            //Calls the stockWarehouse method which adds the part to the observable list for the parts
-            PartWarehouse.stockPartWarehouse(addedPart);
-        } else {
-            //runs the outsourced constructor and sends the data to the warehouse
-            Outsourced addedPart = new Outsourced(2, partName, partPrice, partInv, partMin, partMax);
-            //Calls the stockWarehouse method which adds the part to the observable list for the parts
-            PartWarehouse.stockPartWarehouse(addedPart);
+        //Error checking to determine if values fall in the correct ranges
+
+        String errorMessages = "";
+        boolean errorFound = false;
+
+
+        if (partMin >= partMax) {
+            errorMessages = "Maximum inventory cannot be less than minimum inventory";
+            errorFound = true;
+            System.out.println("Max < Min");
+        }
+
+        if (partInv > partMax || partInv < partMin) {
+
+            errorMessages = errorMessages + " Inventory value must fall between min and max values.";
+            errorFound = true;
+            System.out.println("Inventory out of bounds");
         }
 
 
-        //This returns to the main form after saving the entered part
-        returnToMain(actionEvent);
+        //This if statement displays an error message if the inventory and min max statements found issues.
+        //If there were no issues, the objects are created and stored and then the program returns to the main menu.
 
+        if (errorFound) {
+            inputvalidation.errorMsg(errorMessages);
+        } else {
+
+            //invTextLabel.setTextFill(Color.RED);
+
+
+            //Determines if the object should be a an in house or outsourced part
+            if (inHouseRadio.isSelected()) {
+
+                //Puts the partSource to an integer to be used with the in-house constructor
+                int machineID = Integer.parseInt(partSource);
+
+
+                //run the in house constructor to create a new part based on the input data
+                InHouse addedPart = new InHouse(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, machineID);
+                //Calls the stockWarehouse method which adds the part to the observable list for the parts
+                PartWarehouse.stockPartWarehouse(addedPart);
+            } else {
+                //runs the outsourced constructor and sends the data to the warehouse
+                Outsourced addedPart = new Outsourced(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, partSource);
+                //Calls the stockWarehouse method which adds the part to the observable list for the parts
+                PartWarehouse.stockPartWarehouse(addedPart);
+            }
+
+
+            //This returns to the main form after saving the entered part
+            returnToMain(actionEvent);
+        }
 
     }
 
     //method to return to the main form. Made static so it can be called from other controllers.
     public static void returnToMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(addPartController.class.getResource("/view/MainForm_v1.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("DFC Inventory Control");
         stage.setScene(scene);

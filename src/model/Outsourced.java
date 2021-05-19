@@ -1,23 +1,23 @@
 package model;
 
 public class Outsourced extends Part {
-    private int machineID;
+    private String companyName;
 
     //Constructor to match the superclass
-    public Outsourced(int id, String name, double price, int stock, int min, int max) {
+    public Outsourced(int id, String name, double price, int stock, int min, int max, String companyName) {
         super(id, name, price, stock, min, max);
     }
 
 
     //Getters
-    public int getmachineID() {
-        return machineID;
+    public String getcompanyName() {
+        return companyName;
     }
 
 
     //Setters
-    public void setMachineID() {
-        this.machineID = machineID;
+    public void setcompanyName() {
+        this.companyName = companyName;
     }
 
 }

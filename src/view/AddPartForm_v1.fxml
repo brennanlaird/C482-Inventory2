@@ -105,7 +105,7 @@
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="90.0" text="Inventory" translateY="5.0" />
+                        <Label fx:id="invTextLabel" prefHeight="20.0" prefWidth="90.0" text="Inventory" translateY="5.0" />
                         <TextField fx:id="invText" prefHeight="25.0" prefWidth="150.0" />
                      </children>
                   </HBox>

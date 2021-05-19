@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import model.InHouse;
 import model.Part;
 import model.PartWarehouse;
-
+import model.inputvalidation;
 
 
 public class Main extends Application {
@@ -23,7 +23,8 @@ public class Main extends Application {
 
 
         //test data
-        InHouse partInHouse1 = new InHouse(1,"Test Part 1",5.00,55,10,99); //adds a test part
+
+        InHouse partInHouse1 = new InHouse(inputvalidation.newPartID() ,"Test Part 1",5.00,55,10,99, 42069); //adds a test part
         PartWarehouse.stockPartWarehouse(partInHouse1);
 
 
