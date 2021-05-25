@@ -33,8 +33,6 @@ public class inputvalidation {
     //Code partially from https://thecodinginterface.com/blog/javafx-alerts-and-dialogs/#error-alert
     public static void errorMsg(String msg) {
         var alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Input Error");
-        alert.setHeaderText("One or more issues detected");
         alert.setContentText(msg);
 
         alert.showAndWait();

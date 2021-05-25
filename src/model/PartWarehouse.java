@@ -26,6 +26,23 @@ public class PartWarehouse {
         allParts.add(newPart);
     }
 
+    //takes a part from the modify part controller and inserts the modified data into the parts list
+    public static void modifyPart (Part alteredPart) {
+        int i = 0;
+
+        for (Part parts : allParts) {
+            //is the current item the matching ID to the modified part
+            //if that is true then overwrite this item with the modified values
+
+
+            i++;
+        }
+
+
+
+
+    }
+
 
     public static void newPartID() {
         //method to get a unique part id

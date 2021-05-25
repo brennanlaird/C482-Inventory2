@@ -115,7 +115,7 @@ public class addPartController {
 
             errorMessages = errorMessages + " Inventory value must fall between min and max values.";
             errorFound = true;
-            System.out.println("Inventory out of bounds");
+            //System.out.println("Inventory out of bounds");
         }
 
 

@@ -2,10 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import model.InHouse;
-import model.Outsourced;
-import model.PartWarehouse;
-import model.inputvalidation;
+import model.*;
 
 import java.io.IOException;
 
@@ -135,12 +132,12 @@ public class modPartController {
                 //run the in house constructor to create a new part based on the input data
                 InHouse addedPart = new InHouse(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, machineID);
                 //Calls the stockWarehouse method which adds the part to the observable list for the parts
-                PartWarehouse.stockPartWarehouse(addedPart);
+                PartWarehouse.modifyPart(addedPart);
             } else {
                 //runs the outsourced constructor and sends the data to the warehouse
                 Outsourced addedPart = new Outsourced(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, partSource);
                 //Calls the stockWarehouse method which adds the part to the observable list for the parts
-                PartWarehouse.stockPartWarehouse(addedPart);
+                PartWarehouse.modifyPart(addedPart);
             }
 
 
@@ -149,7 +146,38 @@ public class modPartController {
         }
 
     }
+
+
+    public void receiveModPart(Part partForMod) {
+        idTextMod.setText(String.valueOf(partForMod.getId()));
+        nameTextMod.setText(String.valueOf(partForMod.getName()));
+        invTextMod.setText(String.valueOf(partForMod.getStock()));
+        priceTextMod.setText(String.valueOf(partForMod.getPrice()));
+        maxTextMod.setText(String.valueOf(partForMod.getMax()));
+        minTextMod.setText(String.valueOf(partForMod.getMin()));
+
+
+        if (partForMod instanceof InHouse) {
+            //set the button
+            inHouseRadio.setSelected(true);
+
+            partSourceLabel.setText("Machine ID");
+            //populate the text
+            partSourceTextMod.setText(String.valueOf(((InHouse) partForMod).getmachineID()));
+
+        } else {
+            //For outsourced
+
+            //set the button
+            outSourcedRadio.setSelected(true);
+            //change the label
+            partSourceLabel.setText("Company Name");
+            //populate the text
+            partSourceTextMod.setText(String.valueOf(((Outsourced) partForMod).getcompanyName()));
+        }
+
+    }
 }
 
 
-}
+

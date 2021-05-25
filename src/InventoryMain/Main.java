@@ -1,31 +1,29 @@
 package InventoryMain;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.InHouse;
-import model.Part;
-import model.PartWarehouse;
-import model.inputvalidation;
+import model.*;
 
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-
+    public void start(Stage primaryStage) throws Exception {
 
 
         //Create the part Warehouse to store and display part objects
         PartWarehouse partWarehouse = new PartWarehouse(); //creates an instance of the parts warehouse
 
 
-
         //test data
 
-        InHouse partInHouse1 = new InHouse(inputvalidation.newPartID() ,"Test Part 1",5.00,55,10,99, 42069); //adds a test part
+        InHouse partInHouse1 = new InHouse(inputvalidation.newPartID(), "Test Part 1", 5.00, 55, 10, 99, 42069); //adds a test part
         PartWarehouse.stockPartWarehouse(partInHouse1);
+        Outsourced partOutsourced1 = new Outsourced(inputvalidation.newPartID(), "OS Test1", 3.14, 97, 2, 99, "DF Consult");
+        PartWarehouse.stockPartWarehouse(partOutsourced1);
 
 
         //Loads the main stage and sets of the main for for the first scene
@@ -38,8 +36,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
-
 
 
     }
