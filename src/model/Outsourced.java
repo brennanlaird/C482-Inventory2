@@ -17,7 +17,7 @@ public class Outsourced extends Part {
 
 
     //Setters
-    public void setcompanyName() {
+    public void setcompanyName(String companyName) {
         this.companyName = companyName;
     }
 

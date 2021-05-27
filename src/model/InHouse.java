@@ -17,7 +17,7 @@ public class InHouse extends Part {
 
 
     //Setters
-    public void setMachineID() {
+    public void setMachineID(int machineID) {
         this.machineID = machineID;
     }
 

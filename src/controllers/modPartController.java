@@ -84,6 +84,7 @@ public class modPartController {
 
 
         //Gets the input and assigns it to variables then changes the variables to the right type
+        int partID = Integer.parseInt(idTextMod.getText());
         String partName = nameTextMod.getText();
         int partInv = Integer.parseInt(invTextMod.getText());
         double partPrice = Double.parseDouble(priceTextMod.getText());
@@ -130,12 +131,12 @@ public class modPartController {
 
 
                 //run the in house constructor to create a new part based on the input data
-                InHouse addedPart = new InHouse(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, machineID);
+                InHouse addedPart = new InHouse(partID, partName, partPrice, partInv, partMin, partMax, machineID);
                 //Calls the stockWarehouse method which adds the part to the observable list for the parts
                 PartWarehouse.modifyPart(addedPart);
             } else {
                 //runs the outsourced constructor and sends the data to the warehouse
-                Outsourced addedPart = new Outsourced(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, partSource);
+                Outsourced addedPart = new Outsourced(partID, partName, partPrice, partInv, partMin, partMax, partSource);
                 //Calls the stockWarehouse method which adds the part to the observable list for the parts
                 PartWarehouse.modifyPart(addedPart);
             }
