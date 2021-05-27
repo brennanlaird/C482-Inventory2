@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.InHouse;
 import model.Outsourced;
@@ -51,10 +50,9 @@ public class addPartController {
     //runtime error - need to change the company name so it accepts strings in the part source input.
     //runtime error input validation error box displayed but the code crashed after hitting ok. Need to add a way to reload the form with the data and not continue the code
     public void saveButtonClick(ActionEvent actionEvent) throws IOException {
-        //checks the input for errors
-
 
         //Set of try-catch blocks to determine if the input types are valid. This will detect if an incorrect type or blank is entered.
+        //If the type is incorrect the error message is called and passed the appropriate message
         try {
             int partInv = Integer.parseInt(invText.getText());
         } catch (Exception e) {
@@ -83,8 +81,6 @@ public class addPartController {
             if (inHouseRadio.isSelected()) {
                 int partSource = Integer.parseInt(partSourceText.getText());
             }
-
-
         } catch (Exception e) {
             inputvalidation.errorMsg("Machine ID must be an integer.");
         }
@@ -100,53 +96,45 @@ public class addPartController {
 
 
         //Error checking to determine if values fall in the correct ranges
-
         String errorMessages = "";
         boolean errorFound = false;
 
 
+        //Minimum inventory is greater than maximum
         if (partMin >= partMax) {
             errorMessages = "Maximum inventory cannot be less than minimum inventory";
             errorFound = true;
-            System.out.println("Max < Min");
         }
 
+        //Inventory must fall between the minimum and maximum values
         if (partInv > partMax || partInv < partMin) {
-
             errorMessages = errorMessages + " Inventory value must fall between min and max values.";
             errorFound = true;
-            //System.out.println("Inventory out of bounds");
         }
-
 
         //This if statement displays an error message if the inventory and min max statements found issues.
         //If there were no issues, the objects are created and stored and then the program returns to the main menu.
-
         if (errorFound) {
             inputvalidation.errorMsg(errorMessages);
         } else {
-
-            //invTextLabel.setTextFill(Color.RED);
-
-
             //Determines if the object should be a an in house or outsourced part
             if (inHouseRadio.isSelected()) {
 
                 //Puts the partSource to an integer to be used with the in-house constructor
                 int machineID = Integer.parseInt(partSource);
 
-
                 //run the in house constructor to create a new part based on the input data
                 InHouse addedPart = new InHouse(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, machineID);
+
                 //Calls the stockWarehouse method which adds the part to the observable list for the parts
                 PartWarehouse.stockPartWarehouse(addedPart);
             } else {
                 //runs the outsourced constructor and sends the data to the warehouse
                 Outsourced addedPart = new Outsourced(inputvalidation.newPartID(), partName, partPrice, partInv, partMin, partMax, partSource);
+
                 //Calls the stockWarehouse method which adds the part to the observable list for the parts
                 PartWarehouse.stockPartWarehouse(addedPart);
             }
-
 
             //This returns to the main form after saving the entered part
             returnToMain(actionEvent);

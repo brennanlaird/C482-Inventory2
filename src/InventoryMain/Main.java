@@ -15,10 +15,10 @@ public class Main extends Application {
 
 
         //Create the part Warehouse to store and display part objects
-        PartWarehouse partWarehouse = new PartWarehouse(); //creates an instance of the parts warehouse
+        PartWarehouse partWarehouse = new PartWarehouse();
 
 
-        //test data
+        //test data is added on program launch and then added to the parts warehouse
 
         InHouse partInHouse1 = new InHouse(inputvalidation.newPartID(), "Test Part 1", 5.00, 55, 10, 99, 42069); //adds a test part
         PartWarehouse.stockPartWarehouse(partInHouse1);
@@ -41,4 +41,3 @@ public class Main extends Application {
     }
 }
 
-//adding a comment to test for where the changes are pushed to on github

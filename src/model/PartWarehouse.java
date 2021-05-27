@@ -7,30 +7,27 @@ import javafx.collections.ObservableList;
 
 
 public class PartWarehouse {
+    //The observable list of all parts used to display in the tableview and store all the parts added
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
 
+    //No constructor as the default constructor works fine.
 
-    //Constructor
-    public PartWarehouse() {
 
-        //System.out.println("The part warehouse constructor ran");
-    }
-
-    //static method to add parts to the warehouse by adding them to the observable list object
+    //Static method to add parts to the warehouse by adding them to the observable list object
     public static void stockPartWarehouse(Part newPart) {
-
         allParts.add(newPart);
     }
 
-    //takes a part from the modify part controller and inserts the modified data into the parts list
+    //Takes a part from the modify part controller and inserts the modified data into the parts list
     public static void modifyPart(Part alteredPart) {
-        int i = 0;
+        int i = 0; //counter for the For-loop below
 
+        //The for loop iterates through each part in the all parts list
         for (Part parts : allParts) {
-            //is the current item the matching ID to the modified part
+            //If the ID of the altered part that was passed in from the modify part controller matches the current part selected by the for loop
             if (alteredPart.getId() == allParts.get(i).getId()) {
-                //System.out.println("The altered Parts ID is : " + alteredPart.getId() + " and the current part found is: " + allParts.get(i).getId());
 
+                //The data is altered in the list if the part ID numbers matched
                 allParts.get(i).setId(alteredPart.getId());
                 allParts.get(i).setName(alteredPart.getName());
                 allParts.get(i).setStock(alteredPart.getStock());
@@ -38,22 +35,17 @@ public class PartWarehouse {
                 allParts.get(i).setMax(alteredPart.getMax());
                 allParts.get(i).setMin(alteredPart.getMin());
 
+                //This if statement checks the type of part and then makes the necessary substitution with the modifications
                 if (alteredPart instanceof InHouse) {
                     ((InHouse) allParts.get(i)).setMachineID(((InHouse) alteredPart).getmachineID());
                 } else {
                     ((Outsourced) allParts.get(i)).setcompanyName(((Outsourced) alteredPart).getcompanyName());
                 }
             }
-
-            i++;
+            i++; //Iterates the loop counter to move to the next part in the list
         }
 
 
-    }
-
-
-    public static void newPartID() {
-        //method to get a unique part id
     }
 
     //This returns all the parts in the observable parts list for display in the main form

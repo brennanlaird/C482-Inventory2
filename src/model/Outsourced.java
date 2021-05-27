@@ -9,14 +9,12 @@ public class Outsourced extends Part {
         this.companyName = companyName;
     }
 
-
-    //Getters
+    //Getters for the outsourced subclass
     public String getcompanyName() {
         return companyName;
     }
 
-
-    //Setters
+    //Setters for the outsourced subclass
     public void setcompanyName(String companyName) {
         this.companyName = companyName;
     }

@@ -11,8 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.InHouse;
-import model.Outsourced;
 import model.Part;
 import model.PartWarehouse;
 
@@ -21,10 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class invController implements Initializable {
-    public Label testLabel; //test label to try out button functionality
-
     public Button exitButton;
-
     public Button addPartButton;
     public Button modPartButton;
     public Button deletePartButton;
@@ -50,14 +45,6 @@ public class invController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //This runs before the GUI so stuff can be done here. It will run each time before it is loaded
-
-        //Add test data here
-        //InHouse partInHouse1 = new InHouse(99,"Test Part 1",5.00,55,10,99,9);
-        //InHouse partInHouse2 = new InHouse(2,"Test Part 2",3.50,9,1,99);
-        //end of test data
-
-
         //Sets the parts table from JavaFX to display the items that are contained in the all parts observable list found in the PartWarehouse class
         partTable.setItems(PartWarehouse.getAllParts());
 
@@ -70,74 +57,47 @@ public class invController implements Initializable {
 
     }
 
-
+    //Performs when the add part button is clicked.
     public void addPartButtonClick(ActionEvent actionEvent) throws IOException {
-        //Performs when the add part button is clicked.
-
+        //Sets up and shows the add part form from the fxml file
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddPartForm_v1.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Add Part");
         stage.setScene(scene);
         stage.show();
-
-        //testLabel.setText("You pressed Add part");
     }
 
+    //Performs actions when the mod part button is pressed
     public void modPartButtonClick(ActionEvent actionEvent) throws IOException {
-        //Performs actions when the mod part button is pressed
-        testLabel.setText("You pressed modify part");
-
-        //Get the selected part from the table and set it to a new In house part.
-        //Run time class cast exception by trying to cast to an in house type or to a part type.
-        //Run time error - null pointer when nothing is selected
-        //Part passing = (Part) partTable.getSelectionModel().getSelectedItems();
-
-
-        //System.out.println(passing);
-
-        //Outsourced passingOut = null;
-        //Send the part to the receiveModPart in the controller
-
-
-        //modPartController.receiveModPart(passing, passingOut);
-
-        //Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyPartForm_v1.fxml"));
-
+        //Initializes the Modify Part controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModifyPartForm_v1.fxml"));
         Parent root = loader.load();
-
         modPartController modController = loader.getController();
 
         //Sends the selected part to the modify part controller
         modController.receiveModPart(partTable.getSelectionModel().getSelectedItem());
 
+        //Shows the modify part controller after passing the data from the selected part
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Modify Part");
         stage.setScene(scene);
         stage.show();
-
-
     }
 
+    //Performs actions when the delete part button is pressed
     public void deletePartButtonClick(ActionEvent actionEvent) {
-        //Performs actions when the delete part button is pressed
-        testLabel.setText("You pressed delete part");
-
+        //Sets a dialog to ensure the user wants to delete
         var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         deleteConfirm.setTitle("Confirm Delete");
-
         deleteConfirm.setContentText("Are you sure you want to delete the selected items?");
-
         deleteConfirm.showAndWait();
 
+        //If the user presses yes, the part is deleted from the part table
         if (deleteConfirm.getResult() == ButtonType.YES) {
-
             partTable.getItems().removeAll(partTable.getSelectionModel().getSelectedItems());
         }
-
-
     }
 
     public void exitButtonPress(ActionEvent actionEvent) {
