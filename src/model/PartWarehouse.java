@@ -1,6 +1,6 @@
 package model;
 
-//Class to store parts objects and methods to create unique part IDs
+//Class to store and modify parts objects
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

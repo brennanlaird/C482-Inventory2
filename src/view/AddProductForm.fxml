@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.addProdController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="650.0" prefWidth="1000.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Label layoutX="68.0" layoutY="73.0" text="Add Product">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <VBox layoutX="90.0" layoutY="120.0" prefHeight="272.0" prefWidth="298.0" spacing="25.0">
+               <children>
+                  <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="90.0" text="ID" translateY="5.0" />
+                        <TextField fx:id="idProdText" disable="true" editable="false" prefHeight="25.0" prefWidth="150.0" promptText="Auto Generated" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="90.0" text="Name" translateY="5.0" />
+                        <TextField fx:id="nameProdText" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Label fx:id="invTextLabel" prefHeight="20.0" prefWidth="90.0" text="Inventory" translateY="5.0" />
+                        <TextField fx:id="invProdText" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="90.0" text="Price per Unit" translateY="5.0" />
+                        <TextField fx:id="priceProdText" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="90.0" text="Max" translateY="5.0" />
+                        <TextField fx:id="maxProdText" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="225.0" spacing="30.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="90.0" text="Min" translateY="5.0" />
+                        <TextField fx:id="minProdText" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="200.0" spacing="30.0" />
+               </children>
+            </VBox>
+            <HBox layoutX="90.0" layoutY="372.0" prefHeight="25.0" prefWidth="200.0" spacing="30.0" visible="false">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="80.0" text="Company Name" translateY="5.0" />
+                  <TextField prefHeight="25.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <Button fx:id="cancelButton" layoutX="714.0" layoutY="615.0" mnemonicParsing="false" onAction="#cancelButtonClick" text="Cancel" AnchorPane.bottomAnchor="10.0" />
+            <Button fx:id="saveProdButton" layoutX="536.0" layoutY="455.0" mnemonicParsing="false" onAction="#saveButtonClick" text="Save" AnchorPane.bottomAnchor="10.0" />
+            <Button fx:id="clearFormButton" layoutX="610.0" layoutY="455.0" mnemonicParsing="false" onAction="#clearFormButtonClick" text="Clear Form" AnchorPane.bottomAnchor="10.0" />
+            <TableView fx:id="partsTable" layoutX="557.0" layoutY="83.0" prefHeight="200.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="partIDCol" prefWidth="75.0" text="Part ID" />
+                <TableColumn fx:id="partNameCol" prefWidth="100.0" text="Part Name" />
+                  <TableColumn fx:id="partInvCol" prefWidth="93.0" text="Inventory Level" />
+                  <TableColumn fx:id="partPriceCol" prefWidth="131.0" text="Price/Cost per Unit" />
+              </columns>
+            </TableView>
+            <TableView fx:id="assocPartTable" layoutX="557.0" layoutY="372.0" prefHeight="200.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="assocPartIDCol" prefWidth="75.0" text="Part ID" />
+                <TableColumn fx:id="assocPartNameCol" prefWidth="100.0" text="Part Name" />
+                  <TableColumn fx:id="assocPartInvCol" prefWidth="93.0" text="Inventory Level" />
+                  <TableColumn fx:id="assocPartPriceCol" prefWidth="131.0" text="Price/Cost per Unit" />
+              </columns>
+            </TableView>
+            <Button fx:id="addButton" layoutX="894.0" layoutY="300.0" mnemonicParsing="false" onAction="#addToAssocPartButton" text="Add Part" />
+            <Button fx:id="removeButton" layoutX="813.0" layoutY="590.0" mnemonicParsing="false" onAction="#removeAssocPartButton" text="Remove Associated Part" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

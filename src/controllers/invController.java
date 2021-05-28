@@ -100,6 +100,15 @@ public class invController implements Initializable {
         }
     }
 
+    public void addProdButtonClick (ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AddProductForm.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Add Product");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void exitButtonPress(ActionEvent actionEvent) {
         //Closes the stage using the .close method to end the program
         ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
