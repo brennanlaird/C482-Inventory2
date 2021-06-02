@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class inputvalidation {
 
     private static ArrayList<Integer> partIDs = new ArrayList<Integer>();
-
+    private static ArrayList<Integer> prodIDs = new ArrayList<Integer>();
 
     //Code to display an error message when an input error is found
     //Message is passed from calling code so this method can be used to display multiple types of errors
@@ -37,6 +37,27 @@ public class inputvalidation {
         //add the part ID determined from the if-else statement
         partIDs.add(nextpartID);
         return nextpartID;
+    }
+
+    //Creates and increments to the next available product ID
+    public static int newProdID() {
+
+        //The ID starts at 0
+        int nextprodID = 0;
+
+        //if the array list is not empty then go to the last item and add 1 to get the next ID
+        if (!prodIDs.isEmpty()) {
+            nextprodID = prodIDs.get(prodIDs.size() - 1) + 1;
+            System.out.println("Prod ID was NOT empty");
+        } else {
+            //starting Id is 1 for when the array list is empty
+            nextprodID = 1;
+            System.out.println("Prod ID was empty");
+        }
+
+        //add the part ID determined from the if-else statement
+        prodIDs.add(nextprodID);
+        return nextprodID;
     }
 
 }

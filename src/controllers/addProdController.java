@@ -6,8 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Part;
-import model.PartWarehouse;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +42,9 @@ public class addProdController implements Initializable {
     public TableColumn assocPartPriceCol;
 
 
+    //Create an Observable list to populate the bottom table
+    private ObservableList<Part> assocTable = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTable.setItems(PartWarehouse.getAllParts());
@@ -51,12 +53,6 @@ public class addProdController implements Initializable {
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-
-        //Create an Observalbel list to populate the bottom table
-        ObservableList<Part> assocTable = FXCollections.observableArrayList();
-
-
 
 
         assocPartTable.setItems(assocTable);
@@ -72,7 +68,25 @@ public class addProdController implements Initializable {
         addPartController.returnToMain(actionEvent);
     }
 
-    public void saveButtonClick(ActionEvent actionEvent) {
+    public void saveButtonClick(ActionEvent actionEvent) throws IOException {
+
+        //Error checking goes here
+
+
+
+        //Gets the input and assigns it to variables then changes the variables to the right type
+        String prodName = nameProdText.getText();
+        int prodInv = Integer.parseInt(invProdText.getText());
+        double prodPrice = Double.parseDouble(priceProdText.getText());
+        int prodMax = Integer.parseInt(maxProdText.getText());
+        int prodMin = Integer.parseInt(minProdText.getText());
+
+        Product addingProduct = new Product(inputvalidation.newProdID(), prodName, prodPrice, prodInv, prodMin, prodMax, null);
+
+        addingProduct.addAssociatedPart(assocTable);
+
+        ProdWarehouse.stockProdWarehouse(addingProduct);
+        addPartController.returnToMain(actionEvent);
     }
 
     public void clearFormButtonClick(ActionEvent actionEvent) {
@@ -80,6 +94,15 @@ public class addProdController implements Initializable {
 
     public void addToAssocPartButton(ActionEvent actionEvent) {
 
+        //Gets the part selected from the top table and assigns it to a temp value
+        Part temp = partsTable.getSelectionModel().getSelectedItem();
+
+        //If no thing is selected then return and do nothing
+        if (temp == null) {
+            return;
+        }
+        //Add the selected part to the lower table.
+        assocTable.add(temp);
     }
 
     public void removeAssocPartButton(ActionEvent actionEvent) {

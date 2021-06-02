@@ -164,6 +164,8 @@ public class modPartController {
             partSourceTextMod.setText(String.valueOf(((Outsourced) partForMod).getcompanyName()));
         }
     }
+
+
 }
 
 

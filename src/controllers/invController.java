@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Part;
 import model.PartWarehouse;
+import model.ProdWarehouse;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +56,11 @@ public class invController implements Initializable {
         partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        productTable.setItems(ProdWarehouse.getAllProds());
+        productIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
 
@@ -107,6 +114,24 @@ public class invController implements Initializable {
         stage.setTitle("Add Product");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void modProdButtonClick (ActionEvent actionEvent) throws IOException {
+        //Initializes the Modify Product controller
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModProductForm.fxml"));
+        Parent root = loader.load();
+        modProdController modController = loader.getController();
+
+        //Sends the selected product to the modify product controller
+        modController.receiveModProd((Product) productTable.getSelectionModel().getSelectedItem());
+
+        //Shows the modify product controller after passing the data from the selected product
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Modify Product");
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     public void exitButtonPress(ActionEvent actionEvent) {
