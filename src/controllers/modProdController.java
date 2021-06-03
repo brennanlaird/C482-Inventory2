@@ -53,11 +53,16 @@ public class modProdController implements Initializable {
         partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+
+
+
+
         assocPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         assocPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         assocPartInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         assocPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        System.out.println("Initialize");
 
 
     }
@@ -80,7 +85,7 @@ public class modProdController implements Initializable {
 
         Product modifiedProduct = new Product(prodIDMod, prodNameMod, prodPriceMod, prodInvMod, prodMinMod, prodMaxMod, null);
 
-        //addingProduct.addAssociatedPart(assocTableMod);
+        modifiedProduct.addAssociatedPart(assocTableMod);
 
         ProdWarehouse.modifyProd(modifiedProduct);
         addPartController.returnToMain(actionEvent);
@@ -101,8 +106,6 @@ public class modProdController implements Initializable {
         assocTableMod = prodForMod.getAssocParts();
 
         assocPartTableMod.setItems(assocTableMod);
-
-
 
         //assocPartTableMod.setItems(prodForMod.getAssocParts());
 
@@ -135,6 +138,12 @@ public class modProdController implements Initializable {
     }
 
     public void removeAssocPartButtonMod(ActionEvent actionEvent) {
-        assocPartTableMod.getItems().removeAll(assocPartTableMod.getSelectionModel().getSelectedItem());
+        //assocPartTableMod.getItems().removeAll(assocPartTableMod.getSelectionModel().getSelectedItem());
+
+
+        //Part to_remove = assocPartTableMod.getSelectionModel().getSelectedItem();
+
+        assocTableMod.remove(assocPartTableMod.getSelectionModel().getSelectedItem());
+
     }
 }

@@ -1,6 +1,8 @@
 package InventoryMain;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,7 +36,11 @@ public class Main extends Application {
 
 
         Product Tester = new Product(inputvalidation.newProdID(), "Test Part", 3.50, 55, 1, 99, null);
-        Tester.addAssociatedPart(PartWarehouse.getAllParts());
+
+        ObservableList<Part> testdata = FXCollections.observableArrayList();
+        testdata = PartWarehouse.getAllParts();
+        Tester.addAssociatedPart(testdata);
+
 
         ProdWarehouse.stockProdWarehouse(Tester);
 

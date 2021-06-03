@@ -48,17 +48,23 @@ public class inputvalidation {
         //if the array list is not empty then go to the last item and add 1 to get the next ID
         if (!prodIDs.isEmpty()) {
             nextprodID = prodIDs.get(prodIDs.size() - 1) + 1;
-            System.out.println("Prod ID was NOT empty");
         } else {
             //starting Id is 1 for when the array list is empty
             nextprodID = 1;
-            System.out.println("Prod ID was empty");
         }
 
         //add the part ID determined from the if-else statement
         prodIDs.add(nextprodID);
         return nextprodID;
     }
+
+    public static void partSearch() {
+        //This is the central code to search the parts list
+
+
+
+    }
+
 
 }
 

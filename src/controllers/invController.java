@@ -1,6 +1,8 @@
 package controllers;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,6 +45,12 @@ public class invController implements Initializable {
     public TableColumn productPriceCol;
     public Pane partsPane1;
     public Pane partsPane;
+
+    public TextField partSearchMain;
+    public Button searchPartsButton;
+    public Button searchProdButton;
+    public Button clearSearchButton;
+    public TextField prodSearchMain;
 
 
     @Override
@@ -107,7 +115,7 @@ public class invController implements Initializable {
         }
     }
 
-    public void addProdButtonClick (ActionEvent actionEvent) throws IOException {
+    public void addProdButtonClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddProductForm.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -116,7 +124,7 @@ public class invController implements Initializable {
         stage.show();
     }
 
-    public void modProdButtonClick (ActionEvent actionEvent) throws IOException {
+    public void modProdButtonClick(ActionEvent actionEvent) throws IOException {
         //Initializes the Modify Product controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModProductForm.fxml"));
         Parent root = loader.load();
@@ -138,4 +146,68 @@ public class invController implements Initializable {
         //Closes the stage using the .close method to end the program
         ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
     }
+
+    private ObservableList<Part> searchPartName(String partialName) {
+        //Sets up a list to store the parts found with a partial string match search
+        ObservableList<Part> foundParts = FXCollections.observableArrayList();
+
+        //Sets up a list to store all the parts to search through
+        ObservableList<Part> allParts = PartWarehouse.getAllParts();
+
+        for (Part p : allParts) {
+            if (p.getName().contains(partialName)) {
+                foundParts.add(p);
+            }
+        }
+
+        return foundParts;
+    }
+
+    private Part getPartIDMatch(int searchID) {
+        ObservableList<Part> allParts = PartWarehouse.getAllParts();
+
+        for (Part q : allParts) {
+            if (q.getId() == searchID) {
+                return q;
+            }
+        }
+
+
+        return null;
+    }
+
+
+    public void partSearchHandler(ActionEvent actionEvent) {
+        String searchText = partSearchMain.getText();
+
+        ObservableList<Part> parts = searchPartName(searchText);
+
+        if (parts.size() == 0) {
+
+            try {
+
+                int partID = Integer.parseInt(searchText);
+                Part q = getPartIDMatch(partID);
+                if (q != null) {
+                    parts.add(q);
+                }
+            } catch (NumberFormatException e) {
+            }
+
+        }
+
+
+        partTable.setItems(parts);
+    }
+
+
+    public void clearSearchHandler(ActionEvent actionEvent) {
+        partSearchMain.setText("");
+        prodSearchMain.setText("");
+
+        partSearchHandler(actionEvent);
+
+    }
+
+
 }

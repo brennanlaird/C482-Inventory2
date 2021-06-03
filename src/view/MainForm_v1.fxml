@@ -97,16 +97,18 @@
                               <TableColumn fx:id="partPriceCol" prefWidth="95.0" text="Cost per Unit" />
                           </columns>
                         </TableView>
-                        <TextField layoutX="69.0" layoutY="10.0" prefHeight="25.0" prefWidth="165.0" promptText="Search by Part ID or Name" />
+                        <TextField fx:id="partSearchMain" layoutX="50.0" layoutY="10.0" prefHeight="25.0" prefWidth="165.0" promptText="Search by Part ID or Name" />
                         <Button fx:id="addPartButton" layoutX="141.0" layoutY="266.0" mnemonicParsing="false" onAction="#addPartButtonClick" text="Add" />
                         <Button fx:id="modPartButton" layoutX="200.0" layoutY="266.0" mnemonicParsing="false" onAction="#modPartButtonClick" text="Modify" />
                         <Button fx:id="deletePartButton" layoutX="309.0" layoutY="266.0" mnemonicParsing="false" onAction="#deletePartButtonClick" text="Delete" />
+                        <Button fx:id="searchPartsButton" layoutX="227.0" layoutY="10.0" mnemonicParsing="false" onAction="#partSearchHandler" text="Search Parts" />
+                        <Button fx:id="clearSearchButton" layoutX="333.0" layoutY="10.0" mnemonicParsing="false" onAction="#clearSearchHandler" text="Clear Search" />
                      </children>
                   </Pane>
                   <Pane fx:id="partsPane1" accessibleText="Parts Pane" layoutX="400.0" layoutY="50.0" opacity="0.45" prefHeight="299.0" prefWidth="374.0">
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Products" />
-                        <TextField layoutX="69.0" layoutY="10.0" prefHeight="25.0" prefWidth="165.0" promptText="Search by Product ID or Name" />
+                        <Label layoutX="24.0" layoutY="14.0" text="Products" />
+                        <TextField fx:id="prodSearchMain" layoutX="81.0" layoutY="10.0" prefHeight="25.0" prefWidth="165.0" promptText="Search by Product ID or Name" />
                         <Button fx:id="addProdButton" layoutX="141.0" layoutY="266.0" mnemonicParsing="false" onAction="#addProdButtonClick" text="Add" />
                         <Button fx:id="modProdButton" layoutX="200.0" layoutY="266.0" mnemonicParsing="false" onAction="#modProdButtonClick" text="Modify" />
                         <Button fx:id="deleteProdButton" layoutX="309.0" layoutY="266.0" mnemonicParsing="false" text="Delete" />
@@ -118,6 +120,7 @@
                               <TableColumn fx:id="productPriceCol" prefWidth="88.0" text="Price per Unit" />
                           </columns>
                         </TableView>
+                        <Button fx:id="searchProdButton" layoutX="261.0" layoutY="10.0" mnemonicParsing="false" text="Search Products" />
                      </children>
                   </Pane>
                   <Button fx:id="exitButton" layoutX="734.0" layoutY="386.0" mnemonicParsing="false" onAction="#exitButtonPress" text="Exit" />
