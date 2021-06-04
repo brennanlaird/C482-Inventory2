@@ -113,6 +113,9 @@
             </TableView>
             <Button fx:id="addButton" layoutX="894.0" layoutY="300.0" mnemonicParsing="false" onAction="#addToAssocPartButton" text="Add Part" />
             <Button fx:id="removeButton" layoutX="813.0" layoutY="590.0" mnemonicParsing="false" onAction="#removeAssocPartButton" text="Remove Associated Part" />
+            <Button fx:id="clearSearchButtonAdd" layoutX="557.0" layoutY="48.0" mnemonicParsing="false" onAction="#clearSearchHandler" text="Clear Search" />
+            <Button fx:id="partSearchButtonAdd" layoutX="845.0" layoutY="48.0" mnemonicParsing="false" onAction="#partSearchHandler" text="Search Parts" />
+            <TextField fx:id="partSearchAdd" layoutX="647.0" layoutY="48.0" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID or Name" />
       </children>
     </AnchorPane>
   </children>

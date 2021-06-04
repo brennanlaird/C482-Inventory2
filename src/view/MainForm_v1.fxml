@@ -111,7 +111,7 @@
                         <TextField fx:id="prodSearchMain" layoutX="81.0" layoutY="10.0" prefHeight="25.0" prefWidth="165.0" promptText="Search by Product ID or Name" />
                         <Button fx:id="addProdButton" layoutX="141.0" layoutY="266.0" mnemonicParsing="false" onAction="#addProdButtonClick" text="Add" />
                         <Button fx:id="modProdButton" layoutX="200.0" layoutY="266.0" mnemonicParsing="false" onAction="#modProdButtonClick" text="Modify" />
-                        <Button fx:id="deleteProdButton" layoutX="309.0" layoutY="266.0" mnemonicParsing="false" text="Delete" />
+                        <Button fx:id="deleteProdButton" layoutX="309.0" layoutY="266.0" mnemonicParsing="false" onAction="#deleteProdButtonClick" text="Delete" />
                         <TableView fx:id="productTable" layoutY="39.0" prefHeight="220.0" prefWidth="367.0">
                           <columns>
                             <TableColumn fx:id="productIDCol" prefWidth="75.0" text="Product ID" />
@@ -120,7 +120,7 @@
                               <TableColumn fx:id="productPriceCol" prefWidth="88.0" text="Price per Unit" />
                           </columns>
                         </TableView>
-                        <Button fx:id="searchProdButton" layoutX="261.0" layoutY="10.0" mnemonicParsing="false" text="Search Products" />
+                        <Button fx:id="searchProdButton" layoutX="261.0" layoutY="10.0" mnemonicParsing="false" onAction="#prodSearchHandler" text="Search Products" />
                      </children>
                   </Pane>
                   <Button fx:id="exitButton" layoutX="734.0" layoutY="386.0" mnemonicParsing="false" onAction="#exitButtonPress" text="Exit" />

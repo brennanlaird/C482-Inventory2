@@ -1,5 +1,7 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
@@ -58,12 +60,8 @@ public class inputvalidation {
         return nextprodID;
     }
 
-    public static void partSearch() {
-        //This is the central code to search the parts list
 
 
-
-    }
 
 
 }

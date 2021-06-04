@@ -13,10 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Part;
-import model.PartWarehouse;
-import model.ProdWarehouse;
-import model.Product;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -85,20 +82,25 @@ public class invController implements Initializable {
 
     //Performs actions when the mod part button is pressed
     public void modPartButtonClick(ActionEvent actionEvent) throws IOException {
-        //Initializes the Modify Part controller
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModifyPartForm_v1.fxml"));
-        Parent root = loader.load();
-        modPartController modController = loader.getController();
+        try {
+            //Initializes the Modify Part controller
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModifyPartForm_v1.fxml"));
+            Parent root = loader.load();
+            modPartController modController = loader.getController();
 
-        //Sends the selected part to the modify part controller
-        modController.receiveModPart(partTable.getSelectionModel().getSelectedItem());
+            //Sends the selected part to the modify part controller
+            modController.receiveModPart(partTable.getSelectionModel().getSelectedItem());
 
-        //Shows the modify part controller after passing the data from the selected part
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Modify Part");
-        stage.setScene(scene);
-        stage.show();
+            //Shows the modify part controller after passing the data from the selected part
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Modify Part");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            inputvalidation.errorMsg("Please select a part to modify");
+        }
+
     }
 
     //Performs actions when the delete part button is pressed
@@ -115,6 +117,21 @@ public class invController implements Initializable {
         }
     }
 
+    public void deleteProdButtonClick(ActionEvent actionEvent) {
+
+
+        //Sets a dialog to ensure the user wants to delete
+        var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        deleteConfirm.setTitle("Confirm Delete");
+        deleteConfirm.setContentText("Are you sure you want to delete the selected items?");
+        deleteConfirm.showAndWait();
+
+        //If the user presses yes, the part is deleted from the part table
+        if (deleteConfirm.getResult() == ButtonType.YES) {
+            productTable.getItems().removeAll(productTable.getSelectionModel().getSelectedItems());
+        }
+    }
+
     public void addProdButtonClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddProductForm.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -125,27 +142,32 @@ public class invController implements Initializable {
     }
 
     public void modProdButtonClick(ActionEvent actionEvent) throws IOException {
-        //Initializes the Modify Product controller
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModProductForm.fxml"));
-        Parent root = loader.load();
-        modProdController modController = loader.getController();
 
-        //Sends the selected product to the modify product controller
-        modController.receiveModProd((Product) productTable.getSelectionModel().getSelectedItem());
+        try {
+            //Initializes the Modify Product controller
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModProductForm.fxml"));
+            Parent root = loader.load();
+            modProdController modController = loader.getController();
 
-        //Shows the modify product controller after passing the data from the selected product
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Modify Product");
-        stage.setScene(scene);
-        stage.show();
+            //Sends the selected product to the modify product controller
+            modController.receiveModProd((Product) productTable.getSelectionModel().getSelectedItem());
 
+            //Shows the modify product controller after passing the data from the selected product
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Modify Product");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception exception) {
+            inputvalidation.errorMsg("Please select a product to modify.");
+        }
     }
 
     public void exitButtonPress(ActionEvent actionEvent) {
         //Closes the stage using the .close method to end the program
         ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
     }
+
 
     private ObservableList<Part> searchPartName(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
@@ -154,12 +176,12 @@ public class invController implements Initializable {
         //Sets up a list to store all the parts to search through
         ObservableList<Part> allParts = PartWarehouse.getAllParts();
 
+        //
         for (Part p : allParts) {
             if (p.getName().contains(partialName)) {
                 foundParts.add(p);
             }
         }
-
         return foundParts;
     }
 
@@ -182,6 +204,7 @@ public class invController implements Initializable {
 
         ObservableList<Part> parts = searchPartName(searchText);
 
+
         if (parts.size() == 0) {
 
             try {
@@ -196,17 +219,83 @@ public class invController implements Initializable {
 
         }
 
+        if (parts.isEmpty()) {
 
-        partTable.setItems(parts);
+            inputvalidation.errorMsg("No matching part found.");
+
+        } else {
+            partTable.setItems(parts);
+        }
+
     }
 
-
+    //resets the search boxes to blank and repopulates the tables with all the data
     public void clearSearchHandler(ActionEvent actionEvent) {
         partSearchMain.setText("");
         prodSearchMain.setText("");
 
         partSearchHandler(actionEvent);
+        prodSearchHandler(actionEvent);
+    }
 
+
+    private ObservableList<Product> searchProdName(String partialName) {
+        //Sets up a list to store the parts found with a partial string match search
+        ObservableList<Product> foundProds = FXCollections.observableArrayList();
+
+        //Sets up a list to store all the parts to search through
+        ObservableList<Product> allProds = ProdWarehouse.getAllProds();
+
+        //
+        for (Product p : allProds) {
+            if (p.getName().contains(partialName)) {
+                foundProds.add(p);
+            }
+        }
+        return foundProds;
+    }
+
+    private Product getProdIDMatch(int searchID) {
+        ObservableList<Product> allProds = ProdWarehouse.getAllProds();
+
+        for (Product q : allProds) {
+            if (q.getId() == searchID) {
+                return q;
+            }
+        }
+
+
+        return null;
+    }
+
+
+    public void prodSearchHandler(ActionEvent actionEvent) {
+        String searchText = prodSearchMain.getText();
+
+        ObservableList<Product> prods = searchProdName(searchText);
+
+
+        if (prods.size() == 0) {
+
+            try {
+
+                int prodID = Integer.parseInt(searchText);
+                Product q = getProdIDMatch(prodID);
+                if (q != null) {
+                    prods.add(q);
+                }
+            } catch (NumberFormatException e) {
+            }
+
+        }
+
+        if (prods.isEmpty()) {
+
+            inputvalidation.errorMsg("No matching product found.");
+
+        } else {
+            productTable.setItems(prods);
+        }
     }
 
 
