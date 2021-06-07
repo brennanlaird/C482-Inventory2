@@ -124,7 +124,6 @@
                      </children>
                   </Pane>
                   <Button fx:id="exitButton" layoutX="734.0" layoutY="386.0" mnemonicParsing="false" onAction="#exitButtonPress" text="Exit" />
-                  <Label fx:id="testLabel" layoutX="400.0" layoutY="390.0" text="The test label" />
             </children>
           </AnchorPane>
          </children>

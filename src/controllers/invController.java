@@ -119,23 +119,26 @@ public class invController implements Initializable {
 
     public void deleteProdButtonClick(ActionEvent actionEvent) {
 
+        try {
+            Product deleteCheck = (Product) productTable.getSelectionModel().getSelectedItem();
+            if (!deleteCheck.getAssocParts().isEmpty()) {
+                //There are associated parts, can not delete
+                inputvalidation.errorMsg("This product has associated parts and cannot be deleted.");
+            } else {
 
-        Product deleteCheck = (Product) productTable.getSelectionModel().getSelectedItem();
-        if (!deleteCheck.getAssocParts().isEmpty()) {
-            //There are associated parts, can not delete
-            inputvalidation.errorMsg("This product has associated parts and cannot be deleted.");
-        } else {
+                //Sets a dialog to ensure the user wants to delete
+                var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+                deleteConfirm.setTitle("Confirm Delete");
+                deleteConfirm.setContentText("Are you sure you want to delete the selected items?");
+                deleteConfirm.showAndWait();
 
-            //Sets a dialog to ensure the user wants to delete
-            var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            deleteConfirm.setTitle("Confirm Delete");
-            deleteConfirm.setContentText("Are you sure you want to delete the selected items?");
-            deleteConfirm.showAndWait();
-
-            //If the user presses yes, the part is deleted from the part table
-            if (deleteConfirm.getResult() == ButtonType.YES) {
-                productTable.getItems().removeAll(productTable.getSelectionModel().getSelectedItems());
+                //If the user presses yes, the part is deleted from the part table
+                if (deleteConfirm.getResult() == ButtonType.YES) {
+                    productTable.getItems().removeAll(productTable.getSelectionModel().getSelectedItems());
+                }
             }
+        } catch (Exception e) {
+            inputvalidation.errorMsg("Nothing selected!");
         }
     }
 
