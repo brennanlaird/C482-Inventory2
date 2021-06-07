@@ -50,16 +50,19 @@ public class addProdController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Sets the top table to display all the parts
         partsTable.setItems(PartWarehouse.getAllParts());
 
+        //Sets the columns for the top table
         partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
+        //Sets the associated parts table (the bottom table) to display the private observable list of associated parts
         assocPartTable.setItems(assocTable);
 
+        //Sets up the columns for the bottom table.
         assocPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         assocPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         assocPartInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
@@ -68,6 +71,7 @@ public class addProdController implements Initializable {
     }
 
     public void cancelButtonClick(ActionEvent actionEvent) throws IOException {
+        //Calls the static method to return to the main form
         addPartController.returnToMain(actionEvent);
     }
 
@@ -99,9 +103,6 @@ public class addProdController implements Initializable {
             inputvalidation.errorMsg("Error with min field. Please enter only numbers.");
         }
 
-
-
-
         //Gets the input and assigns it to variables then changes the variables to the right type
         String prodName = nameProdText.getText();
         int prodInv = Integer.parseInt(invProdText.getText());
@@ -109,12 +110,9 @@ public class addProdController implements Initializable {
         int prodMax = Integer.parseInt(maxProdText.getText());
         int prodMin = Integer.parseInt(minProdText.getText());
 
-
-
         //Error checking to determine if values fall in the correct ranges
         String errorMessages = "";
         boolean errorFound = false;
-
 
         //Minimum inventory is greater than maximum
         if (prodMin >= prodMax) {
@@ -128,24 +126,24 @@ public class addProdController implements Initializable {
             errorFound = true;
         }
 
-
         if (errorFound) {
+            //if an error is found, display the error dialog
             inputvalidation.errorMsg(errorMessages);
         } else {
-
-
+            //If no error was found then create the new product and send it to the product warehouse
+            //Create a new product
             Product addingProduct = new Product(inputvalidation.newProdID(), prodName, prodPrice, prodInv, prodMin, prodMax, null);
-
+            //Include the associated parts with the product
             addingProduct.addAssociatedPart(assocTable);
 
+            //Send the product to the warehouse and return to the main form
             ProdWarehouse.stockProdWarehouse(addingProduct);
             addPartController.returnToMain(actionEvent);
         }
-
-
     }
 
     public void clearFormButtonClick(ActionEvent actionEvent) {
+        //Sets the text boxes to blank and clears the associated parts table.
         idProdText.setText("");
         nameProdText.setText("");
         invProdText.setText("");
@@ -169,6 +167,7 @@ public class addProdController implements Initializable {
     }
 
     public void removeAssocPartButton(ActionEvent actionEvent) {
+        //Removes a selected part from the associated parts table
         assocPartTable.getItems().removeAll(assocPartTable.getSelectionModel().getSelectedItems());
     }
 
@@ -189,29 +188,31 @@ public class addProdController implements Initializable {
     }
 
     private Part getPartIDMatch(int searchID) {
+        //Sets a list of all parts to search
         ObservableList<Part> allParts = PartWarehouse.getAllParts();
 
+        //Searches all parts for an ID match
         for (Part q : allParts) {
             if (q.getId() == searchID) {
                 return q;
             }
         }
-
-
+        //return nothing if there isn't a match
         return null;
     }
 
 
     public void partSearchHandler(ActionEvent actionEvent) {
+        //Get the test from the search box
         String searchText = partSearchAdd.getText();
 
+        //Set a list to display the search results for search by string
         ObservableList<Part> parts = searchPartNameAdd(searchText);
 
-
+        //If there are no results, try to search by ID
         if (parts.size() == 0) {
 
             try {
-
                 int partID = Integer.parseInt(searchText);
                 Part q = getPartIDMatch(partID);
                 if (q != null) {
@@ -222,16 +223,12 @@ public class addProdController implements Initializable {
 
         }
 
-
+        //If no match was found, display an error, otherwise, display the matches
         if (parts.isEmpty()) {
-
             inputvalidation.errorMsg("No matching part found.");
-
         } else {
             partsTable.setItems(parts);
         }
-
-
     }
 
     //resets the search boxes to blank and repopulates the tables with all the data

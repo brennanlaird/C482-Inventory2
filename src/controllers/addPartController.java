@@ -86,7 +86,7 @@ public class addPartController {
         }
 
 
-        //Gets the input and assigns it to variables then changes the variables to the right type
+        //Gets the input and assigns it to variables then changes the variables to the correct type
         String partName = nameText.getText();
         int partInv = Integer.parseInt(invText.getText());
         double partPrice = Double.parseDouble(priceText.getText());
@@ -96,6 +96,8 @@ public class addPartController {
 
 
         //Error checking to determine if values fall in the correct ranges
+
+        //Setting up a blank string to concatenate error messages and a boolean flag
         String errorMessages = "";
         boolean errorFound = false;
 
