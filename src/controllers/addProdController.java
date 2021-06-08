@@ -11,7 +11,9 @@ import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**This class implements the Add Product form and the associated error checking to ensure the data is entered correctly.
+ * There are also tables included that allow users to associate parts with the entered product
+ * FUTURE ENHANCEMENT: The product data entry could pull prices from the associated parts and flag products where the price is less than the sum of the parts. */
 public class addProdController implements Initializable {
     public TableView<Part> partsTable;
     public TableView<Part> assocPartTable;
@@ -48,6 +50,7 @@ public class addProdController implements Initializable {
     //Create an Observable list to populate the bottom table
     private ObservableList<Part> assocTable = FXCollections.observableArrayList();
 
+    /**This method is called when the form is initilized to set up the tables to display the desired data.*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Sets the top table to display all the parts
@@ -70,11 +73,13 @@ public class addProdController implements Initializable {
 
     }
 
+    /**Cancel button returns to the main screen and does not save changes*/
     public void cancelButtonClick(ActionEvent actionEvent) throws IOException {
         //Calls the static method to return to the main form
         addPartController.returnToMain(actionEvent);
     }
 
+    /**The save button checks the input data and saves it to the products warehouse.*/
     public void saveButtonClick(ActionEvent actionEvent) throws IOException {
 
         //Set of try-catch blocks to determine if the input types are valid. This will detect if an incorrect type or blank is entered.
@@ -142,6 +147,7 @@ public class addProdController implements Initializable {
         }
     }
 
+    /**Clears the fields and associated parts table and stays with the current form.*/
     public void clearFormButtonClick(ActionEvent actionEvent) {
         //Sets the text boxes to blank and clears the associated parts table.
         idProdText.setText("");
@@ -152,7 +158,7 @@ public class addProdController implements Initializable {
         minProdText.setText("");
         assocPartTable.setItems(null);
     }
-
+    /**Adds a selected part to the displayed list of associated parts.*/
     public void addToAssocPartButton(ActionEvent actionEvent) {
 
         //Gets the part selected from the top table and assigns it to a temp value
@@ -165,12 +171,12 @@ public class addProdController implements Initializable {
         //Add the selected part to the lower table.
         assocTable.add(temp);
     }
-
+    /**Removes a selected part from the displayed list of associated parts.*/
     public void removeAssocPartButton(ActionEvent actionEvent) {
         //Removes a selected part from the associated parts table
         assocPartTable.getItems().removeAll(assocPartTable.getSelectionModel().getSelectedItems());
     }
-
+    /**This method searches for a match in the product name based on the string of test entered in the search box.*/
     private ObservableList<Part> searchPartNameAdd(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -186,7 +192,7 @@ public class addProdController implements Initializable {
         }
         return foundParts;
     }
-
+    /**This method searches the part ID based on the text entered into the search box.*/
     private Part getPartIDMatch(int searchID) {
         //Sets a list of all parts to search
         ObservableList<Part> allParts = PartWarehouse.getAllParts();
@@ -201,7 +207,8 @@ public class addProdController implements Initializable {
         return null;
     }
 
-
+    /**The search handler calls methods to search for the input string for either a partial string match or ID match.
+     * Any matched data is returned as a list which is then displayed in the table.*/
     public void partSearchHandler(ActionEvent actionEvent) {
         //Get the test from the search box
         String searchText = partSearchAdd.getText();
@@ -231,7 +238,7 @@ public class addProdController implements Initializable {
         }
     }
 
-    //resets the search boxes to blank and repopulates the tables with all the data
+    /**Resets the search boxes to blank and repopulates the tables with all the data.*/
     public void clearSearchHandler(ActionEvent actionEvent) {
         partSearchAdd.setText("");
 

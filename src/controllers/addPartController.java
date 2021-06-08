@@ -13,7 +13,7 @@ import model.PartWarehouse;
 import model.inputvalidation;
 
 import java.io.IOException;
-
+/**This class implements the Add Part form and the associated error checking to ensure the data is entered correctly. */
 public class addPartController {
     public RadioButton inHouseRadio;
     public RadioButton outSourcedRadio;
@@ -32,23 +32,25 @@ public class addPartController {
     public Label invTextLabel;
 
 
-    //Changes the label if the in-house radio button is selected
+    /**Changes the label if the in-house radio button is selected.*/
     public void setInHouseRadioSelected(ActionEvent actionEvent) {
         partSourceLabel.setText("Machine ID");
     }
 
-    //Changes the label if the outsourced radio button is selected
+    /**Changes the label if the outsourced radio button is selected.*/
     public void outSourcedRadioSelected(ActionEvent actionEvent) {
         partSourceLabel.setText("Company Name");
     }
-
+    /**Cancel button returns to the main screen and does not save changes*/
     public void cancelButtonClick(ActionEvent actionEvent) throws IOException {
         //Cancel button returns to the main screen and does not save changes
         returnToMain(actionEvent);
     }
 
-    //runtime error - need to change the company name so it accepts strings in the part source input.
-    //runtime error input validation error box displayed but the code crashed after hitting ok. Need to add a way to reload the form with the data and not continue the code
+
+    /**The save button checks the input data and saves it to the parts warehouse.
+     * RUNTIME ERROR: The company name field had to be changed to string input as it caused an error when trying to only accept integers.
+     * RUNTIME ERROR: The input validation error box displayed but the code crashed after hitting ok. Needed to add a way to reload the form with the data and not continue the code.*/
     public void saveButtonClick(ActionEvent actionEvent) throws IOException {
 
         //Set of try-catch blocks to determine if the input types are valid. This will detect if an incorrect type or blank is entered.
@@ -144,7 +146,7 @@ public class addPartController {
 
     }
 
-    //method to return to the main form. Made static so it can be called from other controllers.
+    /**Method to return to the main form. Method is static so it can be called from other controllers.*/
     public static void returnToMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(addPartController.class.getResource("/view/MainForm_v1.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -154,7 +156,7 @@ public class addPartController {
         stage.show();
     }
 
-    //Clears the fields and stays with the current form
+    /**Clears the fields and stays with the current form.*/
     public void clearFormButtonClick(ActionEvent actionEvent) {
         //Resets the text boxes to blank without saving.
         idText.setText("");

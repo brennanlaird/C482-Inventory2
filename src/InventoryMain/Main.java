@@ -9,9 +9,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.*;
 
-
+/**This class creates an application to manage inventory. This class also populates a set of test data on application launch if that section is not comment out.
+ * FUTURE ENHANCEMENTS: The program does not store data after it is closed. This would be a critical enhancement for an inventory application. */
 public class Main extends Application {
 
+
+    /**This method sets up the part and product warehouses, sets up the test data and launches the main form.*/
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -50,7 +53,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+    /**This is the main method. */
     public static void main(String[] args) {
         launch(args);
 

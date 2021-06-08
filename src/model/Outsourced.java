@@ -1,5 +1,5 @@
 package model;
-
+/**This class extends the Part class to create a subclass of Parts called Outsourced. This extends the part class by defining the company tht the part was purchased from.*/
 public class Outsourced extends Part {
     private String companyName;
 

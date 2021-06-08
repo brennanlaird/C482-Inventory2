@@ -5,7 +5,7 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
+/**This class implements an object to store the products which are created. The class provides methods to add, modify and retrieve part objects*/
 public class ProdWarehouse {
     //The observable list of all parts used to display in the tableview and store all the parts added
     private static ObservableList<Product> allProds = FXCollections.observableArrayList();

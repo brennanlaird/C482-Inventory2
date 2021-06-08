@@ -5,7 +5,7 @@ import javafx.scene.control.*;
 import model.*;
 
 import java.io.IOException;
-
+/**This implements the Modify Part Controller to modify a part selected from the main screen.*/
 public class modPartController {
     public RadioButton inHouseRadio;
     public RadioButton outSourcedRadio;
@@ -26,22 +26,22 @@ public class modPartController {
     public Button saveButton;
     public Button clearFormButton;
 
-    //Changes the label if the in-house radio button is selected
+    /**Changes the label if the in-house radio button is selected.*/
     public void setInHouseRadioSelected(ActionEvent actionEvent) {
         partSourceLabel.setText("Machine ID");
     }
 
-    //Changes the label if the outsourced radio button is selected
+    /**Changes the label if the outsourced radio button is selected.*/
     public void outSourcedRadioSelected(ActionEvent actionEvent) {
         partSourceLabel.setText("Company Name");
     }
 
-
+    /**Cancel button returns to the main screen and does not save changes*/
     public void cancelButtonClick(ActionEvent actionEvent) throws IOException {
         //Cancel button returns to the main screen and does not save changes
         addPartController.returnToMain(actionEvent);
     }
-
+    /**The save button checks the input data and saves it to the parts warehouse.*/
     public void saveButtonClick(ActionEvent actionEvent) throws IOException {
         //Set of try-catch blocks to determine if the input types are valid. This will detect if an incorrect type or blank is entered.
         try {
@@ -135,7 +135,7 @@ public class modPartController {
 
     }
 
-    //Method to receive the part to be modified and populate the for with the data. This method is static as it is called from the main form
+    /**Method to receive the part to be modified and populate the for with the data. This method is static as it is called from the main form.*/
     public void receiveModPart(Part partForMod) {
         //Sets the value of the text boxes to those of the received part
         idTextMod.setText(String.valueOf(partForMod.getId()));

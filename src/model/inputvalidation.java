@@ -8,6 +8,10 @@ import javafx.scene.control.TextField;
 import java.util.ArrayList;
 
 //Was initially named input validation but this became a place to store several static methods.
+/**This class is used for static methods that can be called from other methods. It was originally planned to be
+ * used for error checking but that was discarded after the class was named.
+ * FUTURE ENHANCEMENT: Change the name of the class to something that better represents what the class does.
+ * Also, further static methods could be housed here to ensure consistency in how the code is deployed.*/
 public class inputvalidation {
 
     //Declare the array lists that will be used to store the part and product ID

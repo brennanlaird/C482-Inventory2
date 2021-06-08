@@ -1,5 +1,5 @@
 package model;
-
+/**This class extends the Part class to create a subclass of Parts called Inhouse. This extends the part class by defining the machine ID that made the part.*/
 public class InHouse extends Part {
     private int machineID;
 

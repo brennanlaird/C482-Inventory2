@@ -5,7 +5,9 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
+/**This class implements an object to store the parts which are created. The class provides methods to add, modify and retrieve part objects
+ * FUTURE ENHANCEMENT: The inventory data should persist when the program is closed. It would be ideal to use a database implementation to ensure
+ * that saved data can be brought back after the program is closed.*/
 public class PartWarehouse {
     //The observable list of all parts used to display in the tableview and store all the parts added
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();

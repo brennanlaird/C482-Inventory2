@@ -18,7 +18,10 @@ import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**The main inventory controller implements the primary user interface to add and modify parts and products.
+ * This main screen also shows a table of all the available parts and products and allows the data to be searched.
+ * FUTURE ENHANCEMENTS: The first enhancement would be to have the part search execute as the user typed their search strings
+ * and would reset when the search box was cleared. This would reduce user clicks and potentially make the search functionality easier to use.*/
 public class invController implements Initializable {
     public Button exitButton;
     public Button addPartButton;

@@ -11,7 +11,7 @@ import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**This implements the modify product form to change a part selected from the main form.*/
 public class modProdController implements Initializable {
 
     public Label invTextLabel;
@@ -47,6 +47,7 @@ public class modProdController implements Initializable {
     //Create an Observable list to populate the bottom table
     private ObservableList<Part> assocTableMod = FXCollections.observableArrayList();
 
+    /**This method is called when the form is initialized to set up the tables to display the desired data.*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Dsiplays all available parts in the top table on the form
@@ -65,12 +66,13 @@ public class modProdController implements Initializable {
         assocPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
-
+    /**Cancel button returns to the main screen and does not save changes.*/
     public void cancelButtonClick(ActionEvent actionEvent) throws IOException {
         //Cancel button returns to the main screen and does not save changes
         addPartController.returnToMain(actionEvent);
     }
 
+    /**The save button checks the input data and saves it to the products warehouse.*/
     public void saveButtonClick(ActionEvent actionEvent) throws IOException {
         //Set of try-catch blocks to determine if the input types are valid. This will detect if an incorrect type or blank is entered.
         //If the type is incorrect the error message is called and passed the appropriate message
@@ -139,7 +141,7 @@ public class modProdController implements Initializable {
     }
 
 
-    //Receives the data on the part selected in the main form and populates the form.
+    /**Receives the data on the part selected in the main form and populates the form.*/
     public void receiveModProd(Product prodForMod) {
         //Sets the text boxes to display the data on the product sent from the main controller
         idProdTextMod.setText(String.valueOf(prodForMod.getId()));
@@ -156,7 +158,7 @@ public class modProdController implements Initializable {
         //sets the bottom table to display the observalbe list of associated parts
         assocPartTableMod.setItems(assocTableMod);
     }
-
+    /**Adds a selected part to the displayed list of associated parts.*/
     public void addToAssocPartButtonMod(ActionEvent actionEvent) {
         //Gets the part selected from the top table and assigns it to a temp value
         Part temp = partsTableMod.getSelectionModel().getSelectedItem();
@@ -170,14 +172,14 @@ public class modProdController implements Initializable {
 
         assocTableMod.add(temp);
     }
-
+    /**Removes a selected part from the displayed list of associated parts.*/
     public void removeAssocPartButtonMod(ActionEvent actionEvent) {
         //removes a part from the observable list that is selected
         assocTableMod.remove(assocPartTableMod.getSelectionModel().getSelectedItem());
 
     }
 
-
+    /**This method searches for a match in the product name based on the string of test entered in the search box.*/
     private ObservableList<Part> searchPartNameMod(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -193,7 +195,7 @@ public class modProdController implements Initializable {
         }
         return foundParts;
     }
-
+    /**This method searches the part ID based on the text entered into the search box.*/
     private Part getPartIDMatch(int searchID) {
         //Sets a list of all parts to search
         ObservableList<Part> allParts = PartWarehouse.getAllParts();
@@ -208,7 +210,8 @@ public class modProdController implements Initializable {
         return null;
     }
 
-
+    /**The search handler calls methods to search for the input string for either a partial string match or ID match.
+     * Any matched data is returned as a list which is then displayed in the table.*/
     public void partSearchHandler(ActionEvent actionEvent) {
         //Get the test from the search box
         String searchText = partSearchMod.getText();
@@ -238,7 +241,7 @@ public class modProdController implements Initializable {
         }
     }
 
-    //resets the search boxes to blank and repopulates the tables with all the data
+    /**Resets the search boxes to blank and repopulates the tables with all the data.*/
     public void clearSearchHandler(ActionEvent actionEvent) {
         partSearchMod.setText("");
 
