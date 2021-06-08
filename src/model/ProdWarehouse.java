@@ -1,6 +1,6 @@
 package model;
 
-//Class to store and modify parts objects
+//Class to store and modify products objects
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,12 +12,10 @@ public class ProdWarehouse {
 
     //No constructor as the default constructor works fine.
 
-
     //Static method to add parts to the warehouse by adding them to the observable list object
     public static void stockProdWarehouse(Product newProd) {
         allProds.add(newProd);
     }
-
 
     //Takes a product from the modify product controller and inserts the modified data into the products list
     public static void modifyProd(Product alteredProd) {
@@ -37,16 +35,9 @@ public class ProdWarehouse {
                 allProds.get(i).setMin(alteredProd.getMin());
 
                 allProds.get(i).addAssociatedPart(alteredProd.getAssocParts());
-
-
             }
-
         }
-
-
     }
-
-
 
     //This returns all the parts in the observable parts list for display in the main form
     public static ObservableList<Product> getAllProds() {

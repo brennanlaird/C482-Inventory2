@@ -44,14 +44,10 @@ public class PartWarehouse {
             }
             i++; //Iterates the loop counter to move to the next part in the list
         }
-
-
     }
 
     //This returns all the parts in the observable parts list for display in the main form
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }
-
-
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 //Was initially named input validation but this became a place to store several static methods.
 public class inputvalidation {
 
+    //Declare the array lists that will be used to store the part and product ID
     private static ArrayList<Integer> partIDs = new ArrayList<Integer>();
     private static ArrayList<Integer> prodIDs = new ArrayList<Integer>();
 
@@ -21,14 +22,13 @@ public class inputvalidation {
         alert.showAndWait();
     }
 
-
     //Creates and increments to the next available part ID
     public static int newPartID() {
 
         //The ID starts at 0
         int nextpartID = 0;
 
-        //if the array list is not empty then go to the last item and add 1 to get the next ID
+        //if the array list is NOT empty then go to the last item and add 1 to get the next ID
         if (!partIDs.isEmpty()) {
             nextpartID = partIDs.get(partIDs.size() - 1) + 1;
         } else {
@@ -59,10 +59,5 @@ public class inputvalidation {
         prodIDs.add(nextprodID);
         return nextprodID;
     }
-
-
-
-
-
 }
 

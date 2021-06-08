@@ -9,16 +9,13 @@ public class InHouse extends Part {
         this.machineID = machineID;
     }
 
-
     //Getters for the Inhouse subclass
     public int getmachineID() {
         return machineID;
     }
 
-
     //Setters for the InHouse subclass
     public void setMachineID(int machineID) {
         this.machineID = machineID;
     }
-
 }

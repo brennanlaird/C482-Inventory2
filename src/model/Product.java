@@ -113,13 +113,15 @@ public class Product {
         this.max = max;
     }
 
-
+    //Returns the associated parts with a product
     public ObservableList getAssocParts() {return associatedParts;}
 
+    //Adds a part to the list of associated parts with a product
     public void addAssociatedPart (ObservableList addingPart){
         this.associatedParts = addingPart;
     }
 
+    //This method was specified in the UML but was not used in program execution
     public boolean deleteAssociatedPart (Part removingPart){
     return true;
     }
