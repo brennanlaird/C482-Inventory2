@@ -141,7 +141,8 @@ public class modProdController implements Initializable {
     }
 
 
-    /**Receives the data on the part selected in the main form and populates the form.*/
+    /**Receives the data on the part selected in the main form and populates the form.
+     * @param prodForMod The product for modification passed by the main controller.*/
     public void receiveModProd(Product prodForMod) {
         //Sets the text boxes to display the data on the product sent from the main controller
         idProdTextMod.setText(String.valueOf(prodForMod.getId()));
@@ -179,7 +180,8 @@ public class modProdController implements Initializable {
 
     }
 
-    /**This method searches for a match in the product name based on the string of test entered in the search box.*/
+    /**This method searches for a match in the product name based on the string of test entered in the search box.
+     * @param partialName The string to search for in the part names.*/
     private ObservableList<Part> searchPartNameMod(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -195,7 +197,8 @@ public class modProdController implements Initializable {
         }
         return foundParts;
     }
-    /**This method searches the part ID based on the text entered into the search box.*/
+    /**This method searches the part ID based on the text entered into the search box.
+     * @param searchID The integer to search for in part IDs.*/
     private Part getPartIDMatch(int searchID) {
         //Sets a list of all parts to search
         ObservableList<Part> allParts = PartWarehouse.getAllParts();

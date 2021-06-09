@@ -191,7 +191,8 @@ public class invController implements Initializable {
         ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
     }
 
-    /**This method searches for a match in the part name based on the string of test entered in the search box.*/
+    /**This method searches for a match in the part name based on the string of test entered in the search box.
+     * @param partialName The string to search for in the part names.*/
     private ObservableList<Part> searchPartName(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -209,7 +210,8 @@ public class invController implements Initializable {
         return foundParts;
     }
 
-    /**This method searches the part ID based on the text entered into the search box.*/
+    /**This method searches the part ID based on the text entered into the search box.
+     * @param searchID The integer to search for in part IDs.*/
     private Part getPartIDMatch(int searchID) {
         //Set up an observable list of all parts
         ObservableList<Part> allParts = PartWarehouse.getAllParts();
@@ -270,7 +272,8 @@ public class invController implements Initializable {
         prodSearchHandler(actionEvent);
     }
 
-    /**This method searches for a match in the product name based on the string of test entered in the search box.*/
+    /**This method searches for a match in the product name based on the string of test entered in the search box.
+     * @param partialName The string to search for in the product names.*/
     private ObservableList<Product> searchProdName(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Product> foundProds = FXCollections.observableArrayList();
@@ -287,7 +290,8 @@ public class invController implements Initializable {
         return foundProds;
     }
 
-    /**This method searches the product ID based on the text entered into the search box.*/
+    /**This method searches the product ID based on the text entered into the search box.
+     * @param searchID The integer to search for in product IDs.*/
     private Product getProdIDMatch(int searchID) {
         //Set up an observable list of all products
         ObservableList<Product> allProds = ProdWarehouse.getAllProds();

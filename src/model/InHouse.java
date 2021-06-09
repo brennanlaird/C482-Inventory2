@@ -10,13 +10,15 @@ public class InHouse extends Part {
     }
 
     //Getters for the Inhouse subclass
-    /**Method to retrieve the machine ID of the in-house class.*/
+    /**Method to retrieve the machine ID of the in-house class.
+     * @return the machine ID.*/
     public int getmachineID() {
         return machineID;
     }
 
     //Setters for the InHouse subclass
-    /**Method to set the machine ID of the in-house class.*/
+    /**Method to set the machine ID of the in-house class.
+     * @param machineID the Machine ID to set.*/
     public void setMachineID(int machineID) {
         this.machineID = machineID;
     }

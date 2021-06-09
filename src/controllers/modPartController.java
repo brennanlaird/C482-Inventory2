@@ -135,7 +135,8 @@ public class modPartController {
 
     }
 
-    /**Method to receive the part to be modified and populate the for with the data. This method is static as it is called from the main form.*/
+    /**Method to receive the part to be modified and populate the for with the data. This method is static as it is called from the main form.
+     * @param partForMod The part passed by the main form to add the data to the modify part form.*/
     public void receiveModPart(Part partForMod) {
         //Sets the value of the text boxes to those of the received part
         idTextMod.setText(String.valueOf(partForMod.getId()));

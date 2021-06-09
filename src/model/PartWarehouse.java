@@ -15,12 +15,14 @@ public class PartWarehouse {
     //No constructor as the default constructor works fine.
 
 
-    /**Static method to add parts to the warehouse by adding them to the observable list object.*/
+    /**Static method to add parts to the warehouse by adding them to the observable list object.
+     * @param newPart The new part to be saved.*/
     public static void stockPartWarehouse(Part newPart) {
         allParts.add(newPart);
     }
 
-    /**Takes a part from the modify part controller and inserts the modified data into the parts list.*/
+    /**Takes a part from the modify part controller and inserts the modified data into the parts list.
+     * @param alteredPart The part that was modified and will be saved.*/
     public static void modifyPart(Part alteredPart) {
         int i = 0; //counter for the For-loop below
 
@@ -48,7 +50,8 @@ public class PartWarehouse {
         }
     }
 
-    /**This returns all the parts in the observable parts list for display in the main form.*/
+    /**This returns all the parts in the observable parts list for display in the main form.
+     * @return Returns the observable list of all saved parts.*/
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }

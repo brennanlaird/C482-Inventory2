@@ -176,7 +176,8 @@ public class addProdController implements Initializable {
         //Removes a selected part from the associated parts table
         assocPartTable.getItems().removeAll(assocPartTable.getSelectionModel().getSelectedItems());
     }
-    /**This method searches for a match in the product name based on the string of test entered in the search box.*/
+    /**This method searches for a match in the product name based on the string of test entered in the search box.
+     * @param partialName The string to search for in the part names.*/
     private ObservableList<Part> searchPartNameAdd(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -192,7 +193,8 @@ public class addProdController implements Initializable {
         }
         return foundParts;
     }
-    /**This method searches the part ID based on the text entered into the search box.*/
+    /**This method searches the part ID based on the text entered into the search box.
+     * @param searchID The integer to search for in part IDs.*/
     private Part getPartIDMatch(int searchID) {
         //Sets a list of all parts to search
         ObservableList<Part> allParts = PartWarehouse.getAllParts();

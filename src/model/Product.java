@@ -113,10 +113,12 @@ public class Product {
         this.max = max;
     }
 
-    //Returns the associated parts with a product
+    /**Returns the associated parts with a product.
+     * @return Returns an observable list of associated parts.*/
     public ObservableList getAssocParts() {return associatedParts;}
 
-    //Adds a part to the list of associated parts with a product
+    /**Adds a part to the list of associated parts with a product.
+     * @param addingPart The observable list of associated parts. */
     public void addAssociatedPart (ObservableList addingPart){
         this.associatedParts = addingPart;
     }
