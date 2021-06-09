@@ -110,15 +110,24 @@ public class invController implements Initializable {
 
     /**Deletes the selected part when the delete part button is pressed.*/
     public void deletePartButtonClick(ActionEvent actionEvent) {
-        //Sets a dialog to ensure the user wants to delete
-        var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-        deleteConfirm.setTitle("Confirm Delete");
-        deleteConfirm.setContentText("Are you sure you want to delete the selected items?");
-        deleteConfirm.showAndWait();
 
-        //If the user presses yes, the part is deleted from the part table
-        if (deleteConfirm.getResult() == ButtonType.YES) {
-            partTable.getItems().removeAll(partTable.getSelectionModel().getSelectedItems());
+        //Create a part to determine that something was selected.
+        Part deleteCheck = partTable.getSelectionModel().getSelectedItem();
+
+        //If the created part was null, display an error.
+        if(deleteCheck == null) {
+            inputvalidation.errorMsg("No part was selected.");
+        } else {
+            //Sets a dialog to ensure the user wants to delete
+            var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            deleteConfirm.setTitle("Confirm Delete");
+            deleteConfirm.setContentText("Are you sure you want to delete the selected items?");
+            deleteConfirm.showAndWait();
+
+            //If the user presses yes, the part is deleted from the part table
+            if (deleteConfirm.getResult() == ButtonType.YES) {
+                partTable.getItems().removeAll(partTable.getSelectionModel().getSelectedItem());
+            }
         }
     }
 
