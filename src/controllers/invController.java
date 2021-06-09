@@ -52,7 +52,7 @@ public class invController implements Initializable {
     public Button clearSearchButton;
     public TextField prodSearchMain;
 
-
+    /**The initialize method sets up the tables to display the parts and products.*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Sets the parts table from JavaFX to display the items that are contained in the all parts observable list found in the PartWarehouse class
@@ -73,7 +73,7 @@ public class invController implements Initializable {
 
     }
 
-    //Runs when the add part button is clicked.
+    /**Launches the add part form when the add part button is pressed.*/
     public void addPartButtonClick(ActionEvent actionEvent) throws IOException {
         //Sets up and shows the add part form from the fxml file
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddPartForm_v1.fxml"));
@@ -84,7 +84,7 @@ public class invController implements Initializable {
         stage.show();
     }
 
-    //Performs actions when the mod part button is pressed
+    /**Launches the modify product form when the mod part button is pressed.*/
     public void modPartButtonClick(ActionEvent actionEvent) throws IOException {
         //The try-catch block is used to avoid a null pointed error if the button is pushed with nothing selected.
         try {
@@ -108,7 +108,7 @@ public class invController implements Initializable {
         }
     }
 
-    //Performs actions when the delete part button is pressed
+    /**Deletes the selected part when the delete part button is pressed.*/
     public void deletePartButtonClick(ActionEvent actionEvent) {
         //Sets a dialog to ensure the user wants to delete
         var deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
@@ -122,6 +122,7 @@ public class invController implements Initializable {
         }
     }
 
+    /**Deletes the selected part when the delete part button is pressed.*/
     public void deleteProdButtonClick(ActionEvent actionEvent) {
         //The try-catch block will display an error if no product is selected.
         try {
@@ -149,6 +150,7 @@ public class invController implements Initializable {
         }
     }
 
+    /**Launches the add product form when the add product button is pressed.*/
     public void addProdButtonClick(ActionEvent actionEvent) throws IOException {
         //Sets up and displays the Add Product form
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddProductForm.fxml"));
@@ -159,6 +161,7 @@ public class invController implements Initializable {
         stage.show();
     }
 
+    /**Launches the modify product form when the modify product button is pressed.*/
     public void modProdButtonClick(ActionEvent actionEvent) throws IOException {
         //The try-catch block will be used to show an error message if something is not selected when the button is pressed
         try {
@@ -182,12 +185,13 @@ public class invController implements Initializable {
         }
     }
 
+    /**Exits the program when the button is pressed.*/
     public void exitButtonPress(ActionEvent actionEvent) {
         //Closes the stage using the .close method to end the program
         ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
     }
 
-    //Method used to search part names for a partial match. Retuns the list of found parts as an observable list.
+    /**This method searches for a match in the part name based on the string of test entered in the search box.*/
     private ObservableList<Part> searchPartName(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -205,7 +209,7 @@ public class invController implements Initializable {
         return foundParts;
     }
 
-    //Method used to search for parts by ID. Returns the ID of the found part if it is found
+    /**This method searches the part ID based on the text entered into the search box.*/
     private Part getPartIDMatch(int searchID) {
         //Set up an observable list of all parts
         ObservableList<Part> allParts = PartWarehouse.getAllParts();
@@ -221,7 +225,8 @@ public class invController implements Initializable {
         return null;
     }
 
-    //Method to execute when the part search button is pressed
+    /**The search handler calls methods to search the saved parts for the input string for either a partial string match or ID match.
+     * Any matched data is returned as a list which is then displayed in the table.*/
     public void partSearchHandler(ActionEvent actionEvent) {
         //Gets the text string from the parts search box
         String searchText = partSearchMain.getText();
@@ -254,7 +259,7 @@ public class invController implements Initializable {
         }
     }
 
-    //resets the search boxes to blank and repopulates the tables with all the data
+    /**resets the search boxes to blank and repopulates the tables with all the data*/
     public void clearSearchHandler(ActionEvent actionEvent) {
         //Sets the test of both search boxes to the empty string
         partSearchMain.setText("");
@@ -265,7 +270,7 @@ public class invController implements Initializable {
         prodSearchHandler(actionEvent);
     }
 
-    //Method used to search product names for a partial match. Returns the list of found products as an observable list.
+    /**This method searches for a match in the product name based on the string of test entered in the search box.*/
     private ObservableList<Product> searchProdName(String partialName) {
         //Sets up a list to store the parts found with a partial string match search
         ObservableList<Product> foundProds = FXCollections.observableArrayList();
@@ -282,7 +287,7 @@ public class invController implements Initializable {
         return foundProds;
     }
 
-    //Method used to search for products by ID. Returns the ID of the found product if it is found
+    /**This method searches the product ID based on the text entered into the search box.*/
     private Product getProdIDMatch(int searchID) {
         //Set up an observable list of all products
         ObservableList<Product> allProds = ProdWarehouse.getAllProds();
@@ -298,7 +303,8 @@ public class invController implements Initializable {
         return null;
     }
 
-    //Method to handle searching for products when the button is pressed
+    /**The search handler calls methods to search the saved products for the input string for either a partial string match or ID match.
+     * Any matched data is returned as a list which is then displayed in the table.*/
     public void prodSearchHandler(ActionEvent actionEvent) {
         //Gets the text string from the product search box
         String searchText = prodSearchMain.getText();

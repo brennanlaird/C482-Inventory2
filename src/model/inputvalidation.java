@@ -18,15 +18,15 @@ public class inputvalidation {
     private static ArrayList<Integer> partIDs = new ArrayList<Integer>();
     private static ArrayList<Integer> prodIDs = new ArrayList<Integer>();
 
-    //Code to display an error message when an input error is found
-    //Message is passed from calling code so this method can be used to display multiple types of errors
+    /**Code to display an error message when an input error is found. Message is passed from calling code so
+     * this method can be used to display multiple types of errors.*/
     public static void errorMsg(String msg) {
         var alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(msg);
         alert.showAndWait();
     }
 
-    //Creates and increments to the next available part ID
+    /**Creates and increments to the next available part ID.*/
     public static int newPartID() {
 
         //The ID starts at 0
@@ -45,7 +45,7 @@ public class inputvalidation {
         return nextpartID;
     }
 
-    //Creates and increments to the next available product ID
+    /**Creates and increments to the next available product ID.*/
     public static int newProdID() {
 
         //The ID starts at 0

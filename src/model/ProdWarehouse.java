@@ -12,12 +12,12 @@ public class ProdWarehouse {
 
     //No constructor as the default constructor works fine.
 
-    //Static method to add parts to the warehouse by adding them to the observable list object
+    /**Static method to add parts to the warehouse by adding them to the observable list object.*/
     public static void stockProdWarehouse(Product newProd) {
         allProds.add(newProd);
     }
 
-    //Takes a product from the modify product controller and inserts the modified data into the products list
+    /**Takes a product from the modify product controller and inserts the modified data into the products list.*/
     public static void modifyProd(Product alteredProd) {
 
         //The for loop iterates through each product in the all products list
@@ -39,7 +39,7 @@ public class ProdWarehouse {
         }
     }
 
-    //This returns all the parts in the observable parts list for display in the main form
+    /**This returns all the products in the observable products list for display in the main form.*/
     public static ObservableList<Product> getAllProds() {
         return allProds;
     }

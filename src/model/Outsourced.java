@@ -3,18 +3,18 @@ package model;
 public class Outsourced extends Part {
     private String companyName;
 
-    //Constructor to match the superclass
+    /**Constructor for the outsourced sub class to match the part superclass.*/
     public Outsourced(int id, String name, double price, int stock, int min, int max, String companyName) {
         super(id, name, price, stock, min, max);
         this.companyName = companyName;
     }
 
-    //Getters for the outsourced subclass
+    /**Method to retrieve the company name of the outsourced class.*/
     public String getcompanyName() {
         return companyName;
     }
 
-    //Setters for the outsourced subclass
+    /**Method to set the company name of the outsourced class.*/
     public void setcompanyName(String companyName) {
         this.companyName = companyName;
     }
